@@ -107,8 +107,8 @@ class Eciovni
     private function generate(Template $template): void
     {
         $template->setFile($this->templatePath);
-        $template->getLatte()->addFilter('round', function($value, $precision = 2) {
-            return number_format(round($value, $precision), $precision, ',', '');
+        $template->getLatte()->addFilter('round', function(Money $value, $precision = 2) {
+            return number_format(round($value->getAmount() / 100, $precision), $precision, ',', '');
         });
 
         $template->title = $this->data->getTitle();
