@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
 
@@ -39,11 +39,6 @@ class ParticipantImpl implements Participant
     /** @var string */
     private $accountNumber;
 
-    /**
-     * Initializes the Participant.
-     *
-     * @param ParticipantBuilder $participantBuilder
-     */
     public function __construct(ParticipantBuilder $participantBuilder) {
         $this->name = $participantBuilder->getName();
         $this->street = $participantBuilder->getStreet();
@@ -56,85 +51,57 @@ class ParticipantImpl implements Participant
         $this->accountNumber = $participantBuilder->getAccountNumber();
     }
 
-    /**
-     * Returns the name of participant.
-     *
-     * @return string
-     */
-    public function getName() {
+    public function getName(): string
+    {
         return $this->name;
     }
 
-    /**
-     * Returns the street of participant.
-     *
-     * @return string
-     */
-    public function getStreet() {
+    public function getStreet(): string
+    {
         return $this->street;
     }
 
-    /**
-     * Returns the house number of participant.
-     *
-     * @return string
-     */
-    public function getHouseNumber() {
+    public function getHouseNumber(): string
+    {
         return $this->houseNumber;
     }
 
-    /**
-     * Returns the city of participant.
-     *
-     * @return string
-     */
-    public function getCity() {
+    public function getCity(): string
+    {
         return $this->city;
     }
 
-    /**
-     * Returns the zip of participant.
-     *
-     * @return string
-     */
-    public function getZip() {
+    public function getZip(): string
+    {
         return $this->zip;
     }
 
     /**
      * Returns the identification number of participant.
-     *
-     * @return string
      */
-    public function getIn() {
+    public function getIn(): ?string
+    {
         return $this->in;
     }
 
     /**
      * Returns the tax identification number of participant.
-     *
-     * @return string
      */
-    public function getTin() {
+    public function getTin(): ?string
+    {
         return $this->tin;
     }
 
 	/**
 	 * Tells whether a participant is a vat payer (TIN might not mean he actually IS a vat payer)
-	 *
-	 * @return bool
 	 */
-	public function isVatPayer()
+	public function isVatPayer(): bool
 	{
 		return $this->vatPayer;
 	}
 
-    /**
-     * Returns the account number of participant.
-     *
-     * @return string
-     */
-    public function getAccountNumber() {
+    public function getAccountNumber(): ?string
+    {
         return $this->accountNumber;
     }
 

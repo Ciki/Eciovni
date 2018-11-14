@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
 
@@ -9,70 +9,34 @@ namespace OndrejBrejla\Eciovni;
  * @license    New BSD License
  * @link       http://github.com/OndrejBrejla/Eciovni
  */
-interface Participant {
+interface Participant
+{
 
-    /**
-     * Returns the name of participant.
-     *
-     * @return string
-     */
-    public function getName();
+    public function getName(): string;
 
-    /**
-     * Sets the street of participant.
-     *
-     * @param string $street
-     * @return string
-     */
-    public function getStreet();
+    public function getStreet(): string;
 
-    /**
-     * Returns the house number of participant.
-     *
-     * @return string
-     */
-    public function getHouseNumber();
+    public function getHouseNumber(): string;
 
-    /**
-     * Returns the city of participant.
-     *
-     * @return string
-     */
-    public function getCity();
+    public function getCity(): string;
 
-    /**
-     * Returns the zip of participant.
-     *
-     * @return string
-     */
-    public function getZip();
+    public function getZip(): string;
 
     /**
      * Returns the identification number of participant.
-     *
-     * @return string
      */
-    public function getIn();
+    public function getIn(): ?string;
 
     /**
      * Returns the tax identification number of participant.
-     *
-     * @return string
      */
-    public function getTin();
+    public function getTin(): ?string;
 
 	/**
 	 * Tells whether a participant is a vat payer (TIN might not mean he actually IS a vat payer)
-	 *
-	 * @return bool
 	 */
-    public function isVatPayer();
+    public function isVatPayer(): bool;
 
-    /**
-     * Returns the account number of participant.
-     *
-     * @return string
-     */
-    public function getAccountNumber();
+    public function getAccountNumber(): ?string;
 
 }

@@ -1,8 +1,6 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
-
-use InvalidArgumentException;
 
 /**
  * TaxImpl - part of Eciovni plugin for Nette Framework.
@@ -14,70 +12,61 @@ use InvalidArgumentException;
 class TaxImpl implements Tax
 {
 
-    /** @var double */
-    private $taxInUpperDecimal;
+    /** @var float */
+    private $percentage;
 
-    /**
-     * Creates new TaxImpl object.
-     *
-     * @param double $upperDecimal
-     */
-    private function __construct($upperDecimal) {
-        $this->taxInUpperDecimal = $upperDecimal;
+    /** @var float */
+    private $coefficient;
+
+    private function __construct(float $percentage)
+    {
+        $this->percentage = $percentage;
+        $this->coefficient = round($percentage / (100 + $percentage), 4);
     }
 
     /**
      * Creates new Tax from a percent value.
-     *
-     * @param int|double $percent
-     * @return Tax
-     * @throws InvalidArgumentException
      */
-    public static function fromPercent($percent) {
-        if ($percent === NULL) {
-            throw new InvalidArgumentException('$percent can not be null.');
-        }
-        return new TaxImpl(($percent * 0.01) + 1);
+    public static function fromPercent(float $percent): Tax
+    {
+        return new TaxImpl($percent);
     }
 
     /**
      * Creates new Tax from a lower decimal value.
      * I.e. value must be '0.22' for a tax of '22%'.
-     *
-     * @param double $lowerDecimal
-     * @return Tax
-     * @throws InvalidArgumentException
      */
-    public static function fromLowerDecimal($lowerDecimal) {
-        if (!is_double($lowerDecimal)) {
-            throw new InvalidArgumentException('$lowerDecimal must be a double, but ' . $lowerDecimal . ' given.');
-        }
-        return new TaxImpl($lowerDecimal + 1);
+    public static function fromLowerDecimal(float $lowerDecimal): Tax
+    {
+        return new TaxImpl($lowerDecimal * 100);
     }
 
     /**
      * Creates new Tax from a upper decimal value.
      * I.e. value must be '1.22' for a tax of '22%'.
-     *
-     * @param double $lowerDecimal
-     * @return Tax
-     * @throws InvalidArgumentException
      */
-    public static function fromUpperDecimal($upperDecimal) {
-        if (!is_double($upperDecimal)) {
-            throw new InvalidArgumentException('$upperDecimal must be a double, but ' . $upperDecimal . ' given.');
-        }
-        return new TaxImpl($upperDecimal);
+    public static function fromUpperDecimal(float $upperDecimal): Tax
+    {
+        return new TaxImpl($upperDecimal * 100 - 100);
     }
 
-    /**
+	public function inPercentage(): float
+	{
+		return $this->percentage;
+	}
+
+	/**
      * Returns tax in a upper decimal format.
      * I.e. '1.22' for '22%'.
-     *
-     * @return double
      */
-    public function inUpperDecimal() {
-        return $this->taxInUpperDecimal;
+    public function inUpperDecimal(): float
+    {
+        return 1 + ($this->percentage / 100);
     }
+
+	public function asCoefficient(): float
+	{
+		return $this->coefficient;
+	}
 
 }

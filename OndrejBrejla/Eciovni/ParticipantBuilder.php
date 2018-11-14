@@ -1,10 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
 
 /**
  * ParticipantBuilder - part of Eciovni plugin for Nette Framework.
- *
  * @copyright  Copyright (c) 2009 Ondřej Brejla
  * @license    New BSD License
  * @link       http://github.com/OndrejBrejla/Eciovni
@@ -27,28 +26,19 @@ class ParticipantBuilder
     /** @var string */
     private $zip;
 
-    /** @var string */
-    private $in = NULL;
+    /** @var string|null */
+    private $in;
 
-    /** @var string */
-    private $tin = NULL;
+    /** @var string|null */
+    private $tin;
 
     /** @var bool */
     private $vatPayer = false;
 
-    /** @var string */
-    private $accountNumber = NULL;
+    /** @var string|null */
+    private $accountNumber;
 
-    /**
-     * Initializes the Participant builder.
-     *
-     * @param string $name
-     * @param string $street
-     * @param string $houseNumber
-     * @param string $city
-     * @param string $zip
-     */
-    public function __construct($name, $street, $houseNumber, $city, $zip) {
+    public function __construct(string $name, string $street, string $houseNumber, string $city, string $zip) {
         $this->name = $name;
         $this->street = $street;
         $this->houseNumber = $houseNumber;
@@ -58,133 +48,92 @@ class ParticipantBuilder
 
     /**
      * Sets the identification number of participant.
-     *
-     * @param string $in
-     * @return ParticipantBuilder
      */
-    public function setIn($in) {
+    public function setIn(?string $in): self
+    {
         $this->in = $in;
         return $this;
     }
 
     /**
      * Sets the tax identification number of participant.
-     *
-     * @param string $tin
-     * @return ParticipantBuilder
      */
-    public function setTin($tin) {
+    public function setTin(?string $tin): self {
         $this->tin = $tin;
         return $this;
     }
 
-	/**
-	 * @param bool $vatPayer
-	 */
-	public function setVatPayer($vatPayer)
+	public function setVatPayer(bool $vatPayer): self
 	{
 		$this->vatPayer = $vatPayer;
+		return $this;
 	}
 
-    /**
-     * Sets the account number of participant.
-     *
-     * @param string $accountNumber
-     * @return ParticipantBuilder
-     */
-    public function setAccountNumber($accountNumber) {
+    public function setAccountNumber(?string $accountNumber): self
+    {
         $this->accountNumber = $accountNumber;
         return $this;
     }
 
-    /**
-     * Returns the name of participant.
-     *
-     * @return string
-     */
-    public function getName() {
+    public function getName(): string
+    {
         return $this->name;
     }
 
-    /**
-     * Returns the street of participant.
-     *
-     * @return string
-     */
-    public function getStreet() {
+    public function getStreet(): string
+    {
         return $this->street;
     }
 
-    /**
-     * Returns the house number of participant.
-     *
-     * @return string
-     */
-    public function getHouseNumber() {
+    public function getHouseNumber(): string
+    {
         return $this->houseNumber;
     }
 
-    /**
-     * Returns the city of participant.
-     *
-     * @return string
-     */
-    public function getCity() {
+    public function getCity(): string
+    {
         return $this->city;
     }
 
-    /**
-     * Returns the zip of participant.
-     *
-     * @return string
-     */
-    public function getZip() {
+    public function getZip(): string
+    {
         return $this->zip;
     }
 
     /**
      * Returns the identification number of participant.
-     *
-     * @return string
      */
-    public function getIn() {
+    public function getIn(): ?string
+    {
         return $this->in;
     }
 
     /**
      * Returns the tax identification number of participant.
-     *
-     * @return string
      */
-    public function getTin() {
+    public function getTin(): ?string
+    {
         return $this->tin;
     }
 
 	/**
 	 * Tells whether a participant is a vat payer (TIN might not mean he actually IS a vat payer)
-	 *
-	 * @return bool
 	 */
-	public function isVatPayer()
+	public function isVatPayer(): bool
 	{
 		return $this->vatPayer;
 	}
 
     /**
      * Returns the account number of participant.
-     *
-     * @return string
      */
-    public function getAccountNumber() {
+    public function getAccountNumber(): ?string
+    {
         return $this->accountNumber;
     }
 
-    /**
-     * Returns new Participant.
-     *
-     * @return Participant
-     */
-    public function build() {
+    public function build(): Participant
+    {
         return new ParticipantImpl($this);
     }
 

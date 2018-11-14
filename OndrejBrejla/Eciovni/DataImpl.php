@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
 
@@ -17,7 +17,7 @@ class DataImpl implements Data
     /** @var string */
     private $title;
 
-    /** @var string */
+    /** @var string|null */
     private $caption;
 
     /** @var string */
@@ -29,14 +29,14 @@ class DataImpl implements Data
     /** @var Participant */
     private $customer;
 
-    /** @var int */
-    private $variableSymbol = 0;
+    /** @var string|null */
+    private $variableSymbol;
 
-    /** @var int */
-    private $constantSymbol = 0;
+    /** @var string|null */
+    private $constantSymbol;
 
-    /** @var int */
-    private $specificSymbol = 0;
+    /** @var string|null */
+    private $specificSymbol;
 
     /** @var DateTime */
     private $expirationDate;
@@ -48,7 +48,7 @@ class DataImpl implements Data
     private $dateOfVatRevenueRecognition;
 
     /** @var Item[] */
-    private $items = array();
+    private $items = [];
 
     public function __construct(DataBuilder $dataBuilder) {
         $this->title = $dataBuilder->getTitle();
@@ -65,113 +65,64 @@ class DataImpl implements Data
         $this->items = $dataBuilder->getItems();
     }
 
-    /**
-     * Returns the invoice title.
-     *
-     * @return string
-     */
-    public function getTitle() {
+    public function getTitle(): string
+    {
         return $this->title;
     }
 
-	/**
-	 * @return string|null
-	 */
-	public function getCaption()
+	public function getCaption(): ?string
 	{
 		return $this->caption;
 	}
 
-	/**
-     * Returns the invoice id.
-     *
-     * @return string
-     */
-    public function getId() {
+    public function getId(): string
+    {
         return $this->id;
     }
 
-    /**
-     * Returns the invoice supplier.
-     *
-     * @return Participant
-     */
-    public function getSupplier() {
+    public function getSupplier(): Participant
+    {
         return $this->supplier;
     }
 
-    /**
-     * Returns the invoice customer.
-     *
-     * @return Participant
-     */
-    public function getCustomer() {
+    public function getCustomer(): Participant
+    {
         return $this->customer;
     }
 
-    /**
-     * Returns the variable symbol.
-     *
-     * @return int
-     */
-    public function getVariableSymbol() {
+    public function getVariableSymbol(): ?string
+    {
         return $this->variableSymbol;
     }
 
-    /**
-     * Returns the constant symbol.
-     *
-     * @return int
-     */
-    public function getConstantSymbol() {
+    public function getConstantSymbol(): ?string
+    {
         return $this->constantSymbol;
     }
 
-    /**
-     * Returns the specific symbol.
-     *
-     * @return int
-     */
-    public function getSpecificSymbol() {
+    public function getSpecificSymbol(): ?string
+    {
         return $this->specificSymbol;
     }
 
-    /**
-     * Returns the expiration date in defined format.
-     *
-     * @param string $format
-     * @return string
-     */
-    public function getExpirationDate($format = 'd.m.Y') {
+    public function getExpirationDate(string $format = 'd.m.Y'): string
+    {
         return $this->expirationDate->format($format);
     }
 
-    /**
-     * Returns the date of issuance in defined format.
-     *
-     * @param string $format
-     * @return string
-     */
-    public function getDateOfIssuance($format = 'd.m.Y') {
+    public function getDateOfIssuance(string $format = 'd.m.Y'): string
+    {
         return $this->dateOfIssuance->format($format);
     }
 
-    /**
-     * Returns the date of VAT revenue recognition in defined format.
-     *
-     * @param string $format
-     * @return string
-     */
-    public function getDateOfVatRevenueRecognition($format = 'd.m.Y') {
-        return $this->dateOfVatRevenueRecognition === NULL ? '' : $this->dateOfVatRevenueRecognition->format($format);
+    public function getDateOfVatRevenueRecognition(string $format = 'd.m.Y'): string
+    {
+        return $this->dateOfVatRevenueRecognition === null ? '' : $this->dateOfVatRevenueRecognition->format($format);
     }
 
-    /**
-     * Returns the array of items.
-     *
-     * @return Item[]
-     */
-    public function getItems() {
+    /** @return Item[] */
+    public function getItems(): array
+    {
         return $this->items;
     }
 

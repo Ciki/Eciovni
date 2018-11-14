@@ -1,10 +1,11 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
 
+use Money\Money;
+
 /**
  * ItemImpl - part of Eciovni plugin for Nette Framework.
- *
  * @copyright  Copyright (c) 2009 Ondřej Brejla
  * @license    New BSD License
  * @link       http://github.com/OndrejBrejla/Eciovni
@@ -18,7 +19,7 @@ class ItemImpl implements Item
     /** @var Tax */
     private $tax;
 
-    /** @var double */
+    /** @var Money */
     private $unitValue;
 
     /** @var int */
@@ -27,16 +28,8 @@ class ItemImpl implements Item
     /** @var boolean */
     private $unitValueIsTaxed;
 
-    /**
-     * Initializes the Item.
-     *
-     * @param string $description
-     * @param int $units
-     * @param double $unitValue
-     * @param Tax $tax
-     * @param boolean $unitValueIsTaxed
-     */
-    public function __construct($description, $units, $unitValue, Tax $tax, $unitValueIsTaxed = TRUE) {
+    public function __construct(string $description, int $units, Money $unitValue, Tax $tax, bool $unitValueIsTaxed = true)
+    {
         $this->description = $description;
         $this->units = $units;
         $this->unitValue = $unitValue;
@@ -44,93 +37,72 @@ class ItemImpl implements Item
         $this->unitValueIsTaxed = $unitValueIsTaxed;
     }
 
-    /**
-     * Returns the description of the item.
-     *
-     * @return string
-     */
-    public function getDescription() {
+    public function getDescription(): string
+    {
         return $this->description;
     }
 
-    /**
-     * Returns the tax of the item.
-     *
-     * @return Tax
-     */
-    public function getTax() {
+    public function getTax(): Tax
+    {
         return $this->tax;
     }
 
     /**
      * Returns the value of one unit of the item.
-     *
-     * @return double
      */
-    public function getUnitValue() {
+    public function getUnitValue(): Money
+    {
         return $this->unitValue;
     }
 
-    /**
-     * Returns TRUE, if the unit value is taxed (otherwise FALSE).
-     *
-     * @return boolean
-     */
-    public function isUnitValueTaxed() {
+    public function isUnitValueTaxed(): bool
+    {
         return $this->unitValueIsTaxed;
     }
 
-    /**
-     * Returns the number of item units.
-     *
-     * @return int
-     */
-    public function getUnits() {
+    public function getUnits(): int
+    {
         return $this->units;
     }
 
     /**
      * Returns the value of taxes for all units.
-     *
-     * @return double
      */
-    public function countTaxValue() {
-        return ($this->countTaxedUnitValue() - $this->countUntaxedUnitValue()) * $this->getUnits();
+    public function countTaxValue(): Money
+    {
+        return $this->countTaxedUnitValue()->subtract($this->countUntaxedUnitValue())->multiply($this->getUnits());
     }
 
     /**
      * Returns the taxed value of one unit.
-     *
-     * @return double
      */
-    private function countTaxedUnitValue() {
+    private function countTaxedUnitValue(): Money
+    {
         if ($this->isUnitValueTaxed()) {
             return $this->getUnitValue();
-        } else {
-            return $this->getUnitValue() * $this->getTax()->inUpperDecimal();
         }
+
+	    return $this->getUnitValue()->multiply($this->getTax()->inUpperDecimal());
     }
 
     /**
      * Returns the value of unit without tax.
-     *
-     * @return double
      */
-    public function countUntaxedUnitValue() {
+    public function countUntaxedUnitValue(): Money
+    {
         if ($this->isUnitValueTaxed()) {
-            return $this->getUnitValue() / $this->getTax()->inUpperDecimal();
-        } else {
-            return $this->getUnitValue();
+            return $this->getUnitValue()->subtract($this->getUnitValue()->multiply($this->getTax()->asCoefficient()));
         }
+
+	    return $this->getUnitValue();
     }
 
     /**
      * Returns the final value of all taxed units.
-     *
-     * @return double
      */
-    public function countFinalValue() {
-        return $this->getUnits() * $this->countTaxedUnitValue();
+    public function countFinalValue(): Money
+    {
+        return $this->countTaxedUnitValue()->multiply($this->getUnits());
     }
 
 }

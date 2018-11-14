@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
 
@@ -9,91 +9,38 @@ namespace OndrejBrejla\Eciovni;
  * @license    New BSD License
  * @link       http://github.com/OndrejBrejla/Eciovni
  */
-interface Data {
+interface Data
+{
 
     /**
      * Returns the invoice title.
-     *
-     * @return string
      */
-    public function getTitle();
+    public function getTitle(): string;
 
-	/**
-	 * @return string
-	 */
-    public function getCaption();
+    public function getCaption(): ?string;
 
     /**
      * Returns the invoice id.
-     *
-     * @return string
      */
-    public function getId();
+    public function getId(): string;
 
-    /**
-     * Returns the invoice supplier.
-     *
-     * @return Participant
-     */
-    public function getSupplier();
+    public function getSupplier(): Participant;
 
-    /**
-     * Returns the invoice customer.
-     *
-     * @return Participant
-     */
-    public function getCustomer();
+    public function getCustomer(): Participant;
 
-    /**
-     * Returns the variable symbol.
-     *
-     * @return int
-     */
-    public function getVariableSymbol();
+    public function getVariableSymbol(): ?string;
 
-    /**
-     * Returns the constant symbol.
-     *
-     * @return int
-     */
-    public function getConstantSymbol();
+    public function getConstantSymbol(): ?string;
 
-    /**
-     * Returns the specific symbol.
-     *
-     * @return int
-     */
-    public function getSpecificSymbol();
+    public function getSpecificSymbol(): ?string;
 
-    /**
-     * Returns the expiration date in defined format.
-     *
-     * @param string $format
-     * @return string
-     */
-    public function getExpirationDate($format = 'd.m.Y');
+    public function getExpirationDate(string $format = 'd.m.Y'): string;
 
-    /**
-     * Returns the date of issuance in defined format.
-     *
-     * @param string $format
-     * @return string
-     */
-    public function getDateOfIssuance($format = 'd.m.Y');
+    public function getDateOfIssuance(string $format = 'd.m.Y'): string;
 
-    /**
-     * Returns the date of VAT revenue recognition in defined format.
-     *
-     * @param string $format
-     * @return string
-     */
-    public function getDateOfVatRevenueRecognition($format = 'd.m.Y');
+    public function getDateOfVatRevenueRecognition(string $format = 'd.m.Y'): string;
 
-    /**
-     * Returns the array of items.
-     *
-     * @return Item[]
-     */
-    public function getItems();
+    /** @return Item[] */
+    public function getItems(): array;
 
 }

@@ -23,7 +23,7 @@ class EciovniFactory
 		$this->linkGenerator = $linkGenerator;
 	}
 
-	public function create(Data $data = null): Eciovni
+	public function create(?Data $data = null): Eciovni
 	{
 		return new Eciovni($data, $this->templateFactory, $this->linkGenerator);
 	}

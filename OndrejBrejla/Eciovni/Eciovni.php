@@ -1,10 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
 
+use Money\Money;
 use Mpdf\Mpdf;
 use Nette\Application\LinkGenerator;
-use Nette\Application\UI\ITemplate;
 use Nette\Application\UI\ITemplateFactory;
 use Nette\Bridges\ApplicationLatte\Template;
 
@@ -18,8 +18,8 @@ use Nette\Bridges\ApplicationLatte\Template;
 class Eciovni
 {
 
-    /** @var Data */
-    private $data = NULL;
+    /** @var Data|null */
+    private $data;
 
     /** @var Template */
     private $template;
@@ -27,44 +27,38 @@ class Eciovni
     /** @var string */
     private $templatePath;
 
-	public function __construct(Data $data = NULL, ITemplateFactory $templateFactory, LinkGenerator $linkGenerator)
+	public function __construct(?Data $data, ITemplateFactory $templateFactory, LinkGenerator $linkGenerator)
 	{
-		if ($data !== NULL) {
+		if ($data !== null) {
             $this->setData($data);
         }
 
         $this->templatePath = __DIR__ . '/Eciovni.latte';
-		$this->template = $templateFactory->createTemplate();
+
+		/** @var Template $template */
+		$template = $templateFactory->createTemplate();
+
+		$this->template = $template;
 		$this->template->getLatte()->addProvider('uiControl', $linkGenerator);
 	}
 
-    /**
-     * Setter for path to template
-     *
-     * @param string $templatePath
-     */
-    public function setTemplatePath($templatePath)
+    public function setTemplatePath(string $templatePath): void
     {
         $this->templatePath = $templatePath;
     }
 
-
     /**
      * Exports Invoice template via passed mPDF.
-     *
-     * @param mPDF $mpdf
-     * @param string $name
-     * @param string $dest
-     * @return string|NULL
      */
-    public function exportToPdf(Mpdf $mpdf, $name = NULL, $dest = NULL) {
+    public function exportToPdf(Mpdf $mpdf, ?string $name = null, ?string $dest = null): ?string
+    {
         $this->generate($this->template);
         $mpdf->WriteHTML((string) $this->template);
 
-        $result = NULL;
-        if (($name !== '') && ($dest !== NULL)) {
+        $result = null;
+        if (($name !== '') && ($dest !== null)) {
             $result = $mpdf->Output($name, $dest);
-        } elseif ($dest !== NULL) {
+        } elseif ($dest !== null) {
             $result = $mpdf->Output('', $dest);
         } else {
             $result = $mpdf->Output($name, $dest);
@@ -72,56 +66,46 @@ class Eciovni
         return $result;
     }
 
-    /**
-     * Renderers the invoice to the defined template.
-     *
-     * @return void
-     */
-    public function render() {
+    public function render(): void
+    {
         $this->processRender();
     }
 
     /**
      * Renderers the invoice to the defined template.
-     *
-     * @param Data $data
-     * @return void
-     * @throws IllegalStateException If data has already been set.
      */
-    public function renderData(Data $data) {
+    public function renderData(Data $data): void
+    {
         $this->setData($data);
         $this->processRender();
     }
 
     /**
      * Renderers the invoice to the defined template.
-     *
-     * @return void
      */
-    private function processRender() {
+    private function processRender(): void
+    {
         $this->generate($this->template);
         $this->template->render();
     }
 
     /**
      * Sets the data, but only if it hasn't been set already.
-     *
-     * @param Data $data
-     * @return void
-     * @throws IllegalStateException If data has already been set.
      */
-    private function setData(Data $data) {
-        if ($this->data == NULL) {
-            $this->data = $data;
-        } else {
+    private function setData(Data $data): void
+    {
+        if ($this->data !== null) {
             throw new IllegalStateException('Data have already been set!');
         }
+
+	    $this->data = $data;
     }
 
     /**
      * Generates the invoice to the defined template.
      */
-    private function generate(Template $template) {
+    private function generate(Template $template): void
+    {
         $template->setFile($this->templatePath);
         $template->getLatte()->addFilter('round', function($value, $precision = 2) {
             return number_format(round($value, $precision), $precision, ',', '');
@@ -140,11 +124,9 @@ class Eciovni
 
     /**
      * Generates supplier data into template.
-     *
-     * @param ITemplate $template
-     * @return void
      */
-    private function generateSupplier(ITemplate $template) {
+    private function generateSupplier(Template $template): void
+    {
         $supplier = $this->data->getSupplier();
         $template->supplierName = $supplier->getName();
         $template->supplierStreet = $supplier->getStreet();
@@ -158,11 +140,9 @@ class Eciovni
 
     /**
      * Generates customer data into template.
-     *
-     * @param ITemplate $template
-     * @return void
      */
-    private function generateCustomer(ITemplate $template) {
+    private function generateCustomer(Template $template): void
+    {
         $customer = $this->data->getCustomer();
         $template->customerName = $customer->getName();
         $template->customerStreet = $customer->getStreet();
@@ -176,11 +156,9 @@ class Eciovni
 
     /**
      * Generates dates into template.
-     *
-     * @param ITemplate $template
-     * @return void
      */
-    private function generateDates(ITemplate $template) {
+    private function generateDates(Template $template): void
+    {
         $template->dateOfIssuance = $this->data->getDateOfIssuance();
         $template->expirationDate = $this->data->getExpirationDate();
         $template->dateOfVatRevenueRecognition = $this->data->getDateOfVatRevenueRecognition();
@@ -188,11 +166,9 @@ class Eciovni
 
     /**
      * Generates symbols into template.
-     *
-     * @param ITemplate $template
-     * @return void
      */
-    private function generateSymbols(ITemplate $template) {
+    private function generateSymbols(Template $template): void
+    {
         $template->variableSymbol = $this->data->getVariableSymbol();
         $template->specificSymbol = $this->data->getSpecificSymbol();
         $template->constantSymbol = $this->data->getConstantSymbol();
@@ -200,11 +176,9 @@ class Eciovni
 
     /**
      * Generates final values into template.
-     *
-     * @param ITemplate $template
-     * @return void
      */
-    private function generateFinalValues(ITemplate $template) {
+    private function generateFinalValues(Template $template): void
+    {
         $template->finalUntaxedValue = $this->countFinalUntaxedValue();
         $template->finalTaxValue = $this->countFinalTaxValue();
         $template->finalValue = $this->countFinalValues();
@@ -212,45 +186,56 @@ class Eciovni
 
     /**
      * Counts final untaxed value of all items.
-     *
-     * @return int
      */
-    private function countFinalUntaxedValue() {
-        $sum = 0;
+    private function countFinalUntaxedValue(): Money
+    {
+        $sum = null;
+
         foreach ($this->data->getItems() as $item) {
-            $sum += $item->countUntaxedUnitValue() * $item->getUnits();
+        	if ($sum === null) {
+        		$sum = $item->countUntaxedUnitValue()->multiply($item->getUnits());
+	        } else {
+        		$sum = $sum->add($item->countUntaxedUnitValue()->multiply($item->getUnits()));
+	        }
         }
+
         return $sum;
     }
 
     /**
      * Counts final tax value of all items.
-     *
-     * @return int
      */
-    private function countFinalTaxValue() {
-        $sum = 0;
+    private function countFinalTaxValue(): Money
+    {
+        $sum = null;
+
         foreach ($this->data->getItems() as $item) {
-            $sum += $item->countTaxValue();
+	        if ($sum === null) {
+		        $sum = $item->countTaxValue();
+	        } else {
+		        $sum = $sum->add($item->countTaxValue());
+	        }
         }
+
         return $sum;
     }
 
     /**
      * Counts final value of all items.
-     *
-     * @return int
      */
-    private function countFinalValues() {
-        $sum = 0;
+    private function countFinalValues(): Money
+    {
+        $sum = null;
+
         foreach ($this->data->getItems() as $item) {
-            $sum += $item->countFinalValue();
+	        if ($sum === null) {
+		        $sum = $item->countFinalValue();
+	        } else {
+		        $sum = $sum->add($item->countFinalValue());
+	        }
         }
+
         return $sum;
     }
-
-}
-
-class IllegalStateException extends \RuntimeException {
 
 }
