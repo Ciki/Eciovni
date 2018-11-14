@@ -135,6 +135,7 @@ class Eciovni
         $template->supplierZip = $supplier->getZip();
         $template->supplierIn = $supplier->getIn();
         $template->supplierTin = $supplier->getTin();
+	    $template->supplierVatPayer = $supplier->isVatPayer();
         $template->supplierAccountNumber = $supplier->getAccountNumber();
     }
 
@@ -151,6 +152,7 @@ class Eciovni
         $template->customerZip = $customer->getZip();
         $template->customerIn = $customer->getIn();
         $template->customerTin = $customer->getTin();
+        $template->customerVatPayer = $customer->isVatPayer();
         $template->customerAccountNumber = $customer->getAccountNumber();
     }
 
