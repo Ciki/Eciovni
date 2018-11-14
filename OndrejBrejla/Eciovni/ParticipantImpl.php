@@ -33,6 +33,9 @@ class ParticipantImpl implements Participant
     /** @var string */
     private $tin;
 
+    /** @var bool */
+    private $vatPayer;
+
     /** @var string */
     private $accountNumber;
 
@@ -49,6 +52,7 @@ class ParticipantImpl implements Participant
         $this->zip = $participantBuilder->getZip();
         $this->in = $participantBuilder->getIn();
         $this->tin = $participantBuilder->getTin();
+        $this->vatPayer = $participantBuilder->isVatPayer();
         $this->accountNumber = $participantBuilder->getAccountNumber();
     }
 
@@ -114,6 +118,16 @@ class ParticipantImpl implements Participant
     public function getTin() {
         return $this->tin;
     }
+
+	/**
+	 * Tells whether a participant is a vat payer (TIN might not mean he actually IS a vat payer)
+	 *
+	 * @return bool
+	 */
+	public function isVatPayer()
+	{
+		return $this->vatPayer;
+	}
 
     /**
      * Returns the account number of participant.

@@ -33,6 +33,9 @@ class ParticipantBuilder
     /** @var string */
     private $tin = NULL;
 
+    /** @var bool */
+    private $vatPayer = false;
+
     /** @var string */
     private $accountNumber = NULL;
 
@@ -74,6 +77,14 @@ class ParticipantBuilder
         $this->tin = $tin;
         return $this;
     }
+
+	/**
+	 * @param bool $vatPayer
+	 */
+	public function setVatPayer($vatPayer)
+	{
+		$this->vatPayer = $vatPayer;
+	}
 
     /**
      * Sets the account number of participant.
@@ -148,6 +159,16 @@ class ParticipantBuilder
     public function getTin() {
         return $this->tin;
     }
+
+	/**
+	 * Tells whether a participant is a vat payer (TIN might not mean he actually IS a vat payer)
+	 *
+	 * @return bool
+	 */
+	public function isVatPayer()
+	{
+		return $this->vatPayer;
+	}
 
     /**
      * Returns the account number of participant.

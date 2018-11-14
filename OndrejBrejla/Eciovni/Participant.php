@@ -61,6 +61,13 @@ interface Participant {
      */
     public function getTin();
 
+	/**
+	 * Tells whether a participant is a vat payer (TIN might not mean he actually IS a vat payer)
+	 *
+	 * @return bool
+	 */
+    public function isVatPayer();
+
     /**
      * Returns the account number of participant.
      *
