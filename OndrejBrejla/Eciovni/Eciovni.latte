@@ -54,8 +54,17 @@
  * @param    string                $currency
  * @param    string                $paymentType
  * @param    bool	               $discountUsed true if any item has discount applied
+ *
+ * Custom params set via setTemplateParams() below
+ *
  * @param    bool	               $generateQR
+ * @param    ?string               $orderNumber
+ * @param    ?string               $orderDate
+ * @param    ?string               $customText1
+ * @param    ?string               $customText2
 *}
+{* custom params init *}
+{default $orderNumber = null, $orderDate = null, $customText1 = null, $customText2 = null}
 {default $generateQR = true}
 <html>
 	<head>
@@ -212,6 +221,10 @@
 								<td>Konštantný symbol:</td>
 								<td>{$constantSymbol}</td>
 							</tr>
+							<tr n:if="$orderNumber">
+								<td>Objednávka:</td>
+								<td>{$orderNumber} <span n:if="$orderDate">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;zo dňa {$orderDate}</span></td>
+							</tr>
 						</table>
 					</td><td>
 						<table>
@@ -236,9 +249,9 @@
 				</tr>
 			</table>
 
-			{*<p>
-				Fakturujeme Vám
-			</p>*}
+			<p n:if="$customText1" style="margin:0 0 5px 5px;">
+				{$customText1|breaklines}
+			</p>
 
 			<table style="width: 100%; border: 1px solid #BEC8CE;" class="items-table">
 				<thead>
@@ -290,6 +303,10 @@
 					</tr>
 				{/ifset}
 			</table>
+
+			<p n:if="$customText2">
+				{$customText2|breaklines}
+			</p>
 
 			<div style="text-align: right; padding-right: 0px; margin-top:30px;" n:if="$signatureText || $signatureImgSrc">
 				<img n:if="$signatureImgSrc" src="{$signatureImgSrc}" alt="Razítko s podpisom" />
