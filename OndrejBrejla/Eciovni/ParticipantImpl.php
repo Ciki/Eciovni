@@ -30,13 +30,13 @@ class ParticipantImpl implements Participant
     /** @var string */
     private $in;
 
-    /** @var string */
+	/** @var ?string */
     private $tin;
 
     /** @var bool */
     private $vatPayer;
 
-    /** @var string */
+	/** @var ?string */
     private $accountNumber;
 
     public function __construct(ParticipantBuilder $participantBuilder) {

@@ -17,7 +17,7 @@ class DataImpl implements Data
     /** @var string */
     private $title;
 
-    /** @var string|null */
+	/** @var ?string */
     private $caption;
 
     /** @var string */
@@ -29,13 +29,13 @@ class DataImpl implements Data
     /** @var Participant */
     private $customer;
 
-    /** @var string|null */
+	/** @var ?string */
     private $variableSymbol;
 
-    /** @var string|null */
+	/** @var ?string */
     private $constantSymbol;
 
-    /** @var string|null */
+	/** @var ?string */
     private $specificSymbol;
 
     /** @var DateTime */
@@ -44,7 +44,7 @@ class DataImpl implements Data
     /** @var DateTime */
     private $dateOfIssuance;
 
-    /** @var DateTime */
+	/** @var ?DateTime */
     private $dateOfVatRevenueRecognition;
 
     /** @var Item[] */

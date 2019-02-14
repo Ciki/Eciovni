@@ -17,7 +17,7 @@ class DataBuilder
     /** @var string */
     private $title;
 
-	/** @var string|null */
+	/** @var ?string */
 	private $caption;
 
     /** @var string */
@@ -29,13 +29,13 @@ class DataBuilder
     /** @var Participant */
     private $customer;
 
-    /** @var string|null */
+	/** @var ?string */
     private $variableSymbol;
 
-    /** @var string|null */
+	/** @var ?string */
     private $constantSymbol;
 
-    /** @var string|null */
+	/** @var ?string */
     private $specificSymbol;
 
     /** @var DateTime */
@@ -44,7 +44,7 @@ class DataBuilder
     /** @var DateTime */
     private $dateOfIssuance;
 
-    /** @var DateTime|null */
+	/** @var ?DateTime */
     private $dateOfVatRevenueRecognition;
 
     /** @var Item[] */

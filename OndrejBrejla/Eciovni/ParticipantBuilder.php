@@ -29,7 +29,7 @@ class ParticipantBuilder
     /** @var string|null */
     private $in;
 
-    /** @var string|null */
+	/** @var ?string */
     private $tin;
 
     /** @var bool */
@@ -46,19 +46,16 @@ class ParticipantBuilder
         $this->zip = $zip;
     }
 
-    /**
-     * Sets the identification number of participant.
-     */
+
     public function setIn(?string $in): self
     {
         $this->in = $in;
         return $this;
     }
 
-    /**
-     * Sets the tax identification number of participant.
-     */
-    public function setTin(?string $tin): self {
+
+	public function setTin(?string $tin): self
+	{
         $this->tin = $tin;
         return $this;
     }
