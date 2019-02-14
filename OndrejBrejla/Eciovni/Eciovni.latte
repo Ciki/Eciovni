@@ -129,7 +129,7 @@
 
 						<table>
 							<tr n:if="$supplierIn">
-								<td width="{ifset $supplierVatId}50{else}40{/ifset}">IČO:</td>
+								<td width="{if $supplierVatId}50{else}40{/if}">IČO:</td>
 								<td>{$supplierIn}</td>
 							</tr>
 							<tr n:if="$supplierTin">
@@ -137,12 +137,12 @@
 								<td>{$supplierTin}</td>
 							</tr>
 							<tr>
-								{ifset $supplierVatId}
+								{if $supplierVatId}
 									<td>IČ DPH:</td>
 									<td>{$supplierVatId}</td>
 								{else}
 									<td colspan="2"><br>Nie sme platitelia DPH.</td>
-									{/ifset}
+									{/if}
 							</tr>
 							<tr n:if="$supplierRegistryInfo">
 								<td colspan="2">Spoločnosť je zapísaná v Obchodnom registri {$supplierRegistryInfo}</td>
@@ -262,8 +262,8 @@
 						<th style="text-align: right;">Cena MJ</th>
 						<th style="text-align: right;" n:if="$discountUsed">%Zľava</th>
 						<th style="text-align: right;" n:if="$discountUsed">Zľava</th>
-						<th style="text-align: right;" n:ifset="$supplierVatId">%DPH</th>
-						<th style="text-align: right;" n:ifset="$supplierVatId">DPH</th>
+						<th style="text-align: right;" n:if="$supplierVatId">%DPH</th>
+						<th style="text-align: right;" n:if="$supplierVatId">DPH</th>
 						<th style="text-align: right;">Celkom ({$currency})</th>
 					</tr>
 				</thead>
@@ -275,15 +275,15 @@
 						<td style="text-align: right;">{$item->countUntaxedUnitValue()|round}</td>
 						<td style="text-align: right;" n:if="$discountUsed">{$item->getDiscountPercent()|round}</td>
 						<td style="text-align: right;" n:if="$discountUsed">{$item->countDiscountValue()|round}</td>
-						<td style="text-align: right;" n:ifset="$supplierVatId">{$item->getTax()->inUpperDecimal() * 100 - 100|round}</td>
-						<td style="text-align: right;" n:ifset="$supplierVatId">{$item->countTaxValue()|round}</td>
+						<td style="text-align: right;" n:if="$supplierVatId">{$item->getTax()->inUpperDecimal() * 100 - 100|round}</td>
+						<td style="text-align: right;" n:if="$supplierVatId">{$item->countTaxValue()|round}</td>
 						<td style="text-align: right;">{$item->countFinalValue()|round}</td>
 					</tr>
 				</tbody>
 			</table>
 
 			<table style="width: 100%; border: 2px solid #000000;">
-				{ifset $supplierVatId}
+				{if $supplierVatId}
 					<tr>
 						<td>Celkom bez DPH ({$currency}):</td>
 						<td style="text-align: right;">{$finalUntaxedValue|round}</td>
@@ -301,7 +301,7 @@
 						<td><strong>Cena celkom ({$currency}):</strong></td>
 						<td style="text-align: right;"><strong>{$finalValue|round}</strong></td>
 					</tr>
-				{/ifset}
+				{/if}
 			</table>
 
 			<p n:if="$customText2">
