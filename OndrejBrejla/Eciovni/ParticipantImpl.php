@@ -28,6 +28,9 @@ class ParticipantImpl implements Participant
     private $zip;
 
     /** @var string */
+	private $country;
+
+	/** @var ?string */
     private $in;
 
 	/** @var ?string */
@@ -47,6 +50,7 @@ class ParticipantImpl implements Participant
         $this->houseNumber = $participantBuilder->getHouseNumber();
         $this->city = $participantBuilder->getCity();
         $this->zip = $participantBuilder->getZip();
+		$this->country = $participantBuilder->getCountry();
         $this->in = $participantBuilder->getIn();
         $this->tin = $participantBuilder->getTin();
         $this->vatPayer = $participantBuilder->isVatPayer();
@@ -82,6 +86,13 @@ class ParticipantImpl implements Participant
     {
         return $this->zip;
     }
+
+
+	public function getCountry(): string
+	{
+		return $this->country;
+	}
+
 
     /**
      * Returns the identification number of participant.

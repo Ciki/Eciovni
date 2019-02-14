@@ -26,7 +26,10 @@ class ParticipantBuilder
     /** @var string */
     private $zip;
 
-    /** @var string|null */
+	/** @var string */
+	private $country;
+
+	/** @var ?string */
     private $in;
 
 	/** @var ?string */
@@ -39,12 +42,15 @@ class ParticipantBuilder
     private $accountNumber;
 
 
-    public function __construct(string $name, string $street, string $houseNumber, string $city, string $zip) {
+	public function __construct(string $name, string $street, string $houseNumber,
+		string $city, string $zip, string $country)
+	{
         $this->name = $name;
         $this->street = $street;
         $this->houseNumber = $houseNumber;
         $this->city = $city;
         $this->zip = $zip;
+		$this->country = $country;
     }
 
 
@@ -103,9 +109,13 @@ class ParticipantBuilder
         return $this->zip;
     }
 
-    /**
-     * Returns the identification number of participant.
-     */
+
+	public function getCountry(): string
+	{
+		return $this->country;
+	}
+
+
     public function getIn(): ?string
     {
         return $this->in;

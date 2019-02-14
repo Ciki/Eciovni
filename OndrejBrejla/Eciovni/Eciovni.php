@@ -146,6 +146,7 @@ class Eciovni
         $template->supplierHouseNumber = $supplier->getHouseNumber();
         $template->supplierCity = $supplier->getCity();
         $template->supplierZip = $supplier->getZip();
+		$template->supplierCountry = $supplier->getCountry();
         $template->supplierIn = $supplier->getIn();
         $template->supplierTin = $supplier->getTin();
 	    $template->supplierVatPayer = $supplier->isVatPayer();
@@ -164,6 +165,7 @@ class Eciovni
         $template->customerHouseNumber = $customer->getHouseNumber();
         $template->customerCity = $customer->getCity();
         $template->customerZip = $customer->getZip();
+		$template->customerCountry = $customer->getCountry();
         $template->customerIn = $customer->getIn();
         $template->customerTin = $customer->getTin();
         $template->customerVatPayer = $customer->isVatPayer();

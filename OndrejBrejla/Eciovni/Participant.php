@@ -23,6 +23,8 @@ interface Participant
 
     public function getZip(): string;
 
+	public function getCountry(): string;
+
     /**
      * Returns the identification number of participant.
      */
