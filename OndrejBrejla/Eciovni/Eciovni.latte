@@ -8,6 +8,9 @@
  * @param    string                $title
  * @param    string                $id
  *
+ * @param    ?string               $signatureText
+ * @param    ?string               $signatureImgSrc
+ *
  * @param    string                $supplierName
  * @param    string                $supplierStreet
  * @param    string                $supplierHouseNumber
@@ -276,9 +279,10 @@
 				{/ifset}
 			</table>
 
-			<div style="text-align: right; padding-right: 100px;">
-				<div style="font-weight: bold;">Vystavil, razítko, podpis:</div>
-				<img src="" alt="Razitko s podpisem" />
+			<div style="text-align: right; padding-right: 0px; margin-top:30px;" n:if="$signatureText || $signatureImgSrc">
+				Vystavil:
+				<img n:if="$signatureImgSrc" src="{$signatureImgSrc}" alt="Razítko s podpisom" />
+				<span n:if="$signatureText" style="font-style: italic;">{$signatureText}</span>
 			</div>
 		</div>
 	</body>

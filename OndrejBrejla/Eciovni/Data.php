@@ -20,10 +20,11 @@ interface Data
 
 	public function getCaption(): ?string;
 
-	/**
-	 * Returns the invoice id.
-	 */
 	public function getId(): string;
+
+	public function getSignatureText(): ?string;
+
+	public function getSignatureImgSrc(): ?string;
 
 	public function getSupplier(): Participant;
 

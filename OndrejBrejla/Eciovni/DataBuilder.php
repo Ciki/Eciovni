@@ -23,6 +23,12 @@ class DataBuilder
 	/** @var string */
 	private $id;
 
+	/** @var ?string */
+	private $signatureText;
+
+	/** @var ?string */
+	private $signatureImgSrc;
+
 	/** @var Participant */
 	private $supplier;
 
@@ -90,6 +96,18 @@ class DataBuilder
 	public function getId(): string
 	{
 		return $this->id;
+	}
+
+
+	public function getSignatureText(): ?string
+	{
+		return $this->signatureText;
+	}
+
+
+	public function getSignatureImgSrc(): ?string
+	{
+		return $this->signatureImgSrc;
 	}
 
 
@@ -172,6 +190,20 @@ class DataBuilder
 	public function setCaption(?string $caption): void
 	{
 		$this->caption = $caption;
+	}
+
+
+	public function setSignatureText(?string $text): self
+	{
+		$this->signatureText = $text;
+		return $this;
+	}
+
+
+	public function setSignatureImgSrc(?string $src): self
+	{
+		$this->signatureImgSrc = $src;
+		return $this;
 	}
 
 
