@@ -30,6 +30,9 @@ class DataImpl implements Data
     private $customer;
 
 	/** @var ?string */
+	private $paymentType;
+
+	/** @var ?string */
     private $variableSymbol;
 
 	/** @var ?string */
@@ -56,6 +59,7 @@ class DataImpl implements Data
         $this->id = $dataBuilder->getId();
         $this->supplier = $dataBuilder->getSupplier();
         $this->customer = $dataBuilder->getCustomer();
+		$this->paymentType = $dataBuilder->getPaymentType();
         $this->variableSymbol = $dataBuilder->getVariableSymbol();
         $this->constantSymbol = $dataBuilder->getConstantSymbol();
         $this->specificSymbol = $dataBuilder->getSpecificSymbol();
@@ -89,6 +93,13 @@ class DataImpl implements Data
     {
         return $this->customer;
     }
+
+
+	public function getPaymentType(): ?string
+	{
+		return $this->paymentType;
+	}
+
 
     public function getVariableSymbol(): ?string
     {

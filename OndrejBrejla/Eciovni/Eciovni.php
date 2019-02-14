@@ -114,6 +114,7 @@ class Eciovni
         $template->title = $this->data->getTitle();
         $template->caption = (string) $this->data->getCaption();
         $template->id = $this->data->getId();
+        $template->paymentType = $this->data->getPaymentType();
         $template->items = $this->data->getItems();
         $this->generateSupplier($template);
         $this->generateCustomer($template);

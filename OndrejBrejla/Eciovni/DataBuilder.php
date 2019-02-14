@@ -30,6 +30,9 @@ class DataBuilder
     private $customer;
 
 	/** @var ?string */
+	private $paymentType;
+
+	/** @var ?string */
     private $variableSymbol;
 
 	/** @var ?string */
@@ -50,12 +53,15 @@ class DataBuilder
     /** @var Item[] */
     private $items = [];
 
-    public function __construct(string $id, string $title, Participant $supplier, Participant $customer, DateTime $expirationDate, DateTime $dateOfIssuance, array $items)
+	public function __construct(string $id, string $title, Participant $supplier,
+		Participant $customer, DateTime $expirationDate, DateTime $dateOfIssuance,
+		array $items, string $paymentType)
     {
         $this->id = $id;
         $this->title = $title;
         $this->supplier = $supplier;
         $this->customer = $customer;
+		$this->paymentType = $paymentType;
         $this->expirationDate = $expirationDate;
         $this->dateOfIssuance = $dateOfIssuance;
         $this->addItems($items);
@@ -126,6 +132,13 @@ class DataBuilder
     {
         return $this->customer;
     }
+
+
+	public function getPaymentType(): ?string
+	{
+		return $this->paymentType;
+	}
+
 
     public function getVariableSymbol(): ?string
     {
