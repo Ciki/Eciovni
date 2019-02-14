@@ -29,6 +29,9 @@ class DataImpl implements Data
 	/** @var ?string */
 	private $signatureImgSrc;
 
+	/** @var ?string */
+	private $supplierLogoImgSrc;
+
 	/** @var Participant */
 	private $supplier;
 
@@ -70,6 +73,7 @@ class DataImpl implements Data
 		$this->id = $dataBuilder->getId();
 		$this->signatureText = $dataBuilder->getSignatureText();
 		$this->signatureImgSrc = $dataBuilder->getSignatureImgSrc();
+		$this->supplierLogoImgSrc = $dataBuilder->getSupplierLogoImgSrc();
 		$this->supplier = $dataBuilder->getSupplier();
 		$this->customer = $dataBuilder->getCustomer();
 		$this->paymentType = $dataBuilder->getPaymentType();
@@ -111,6 +115,12 @@ class DataImpl implements Data
 	public function getSignatureImgSrc(): ?string
 	{
 		return $this->signatureImgSrc;
+	}
+
+
+	public function getSupplierLogoImgSrc(): ?string
+	{
+		return $this->supplierLogoImgSrc;
 	}
 
 

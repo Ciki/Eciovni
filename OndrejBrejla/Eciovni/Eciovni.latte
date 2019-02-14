@@ -10,6 +10,7 @@
  *
  * @param    ?string               $signatureText
  * @param    ?string               $signatureImgSrc
+ * @param    ?string               $supplierLogoImgSrc
  *
  * @param    string                $supplierName
  * @param    string                $supplierStreet
@@ -88,8 +89,12 @@
 				font-size:11px;
 			}
 		</style>
-		<div style="background:url(/images/logo-invoice.png) no-repeat top left transparent;">
-			<div style="text-align: right; padding-bottom:10px; margin-bottom:10px; border-bottom: 2px solid #000000; color: #1A5DAC; font-weight: bold; font-size: 20px;">{$title} {$id}</div>
+
+		<div>
+			<div style="text-align: right; padding-bottom:8px; margin-bottom:10px; border-bottom: 2px solid #000000; color: #1A5DAC; font-weight: bold; font-size: 20px;">
+				<img n:if="$supplierLogoImgSrc" src="{$supplierLogoImgSrc}" alt="Logo" style="max-height:35px; position:absolute; top:5px;left:8px; display:inline-block;float:left;" />
+				<div style="float:right; padding-top: 10px;">{$title} {$id}</div>
+			</div>
 
 			<table style="margin-bottom:0;">
 				<tr>

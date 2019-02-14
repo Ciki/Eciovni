@@ -29,6 +29,9 @@ class DataBuilder
 	/** @var ?string */
 	private $signatureImgSrc;
 
+	/** @var ?string */
+	private $supplierLogoImgSrc;
+
 	/** @var Participant */
 	private $supplier;
 
@@ -108,6 +111,12 @@ class DataBuilder
 	public function getSignatureImgSrc(): ?string
 	{
 		return $this->signatureImgSrc;
+	}
+
+
+	public function getSupplierLogoImgSrc(): ?string
+	{
+		return $this->supplierLogoImgSrc;
 	}
 
 
@@ -203,6 +212,13 @@ class DataBuilder
 	public function setSignatureImgSrc(?string $src): self
 	{
 		$this->signatureImgSrc = $src;
+		return $this;
+	}
+
+
+	public function setSupplierLogoImgSrc(?string $src): self
+	{
+		$this->supplierLogoImgSrc = $src;
 		return $this;
 	}
 

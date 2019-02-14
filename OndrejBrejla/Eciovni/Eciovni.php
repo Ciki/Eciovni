@@ -130,6 +130,7 @@ class Eciovni
 		$template->id = $this->data->getId();
 		$template->signatureText = $this->data->getSignatureText();
 		$template->signatureImgSrc = $this->data->getSignatureImgSrc();
+		$template->supplierLogoImgSrc = $this->data->getSupplierLogoImgSrc();
 		$template->paymentType = $this->data->getPaymentType();
 		$template->items = $this->data->getItems();
 		$template->currency = $template->items[0]->getUnitValue()->getCurrency();

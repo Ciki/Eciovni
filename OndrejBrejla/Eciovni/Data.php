@@ -26,6 +26,8 @@ interface Data
 
 	public function getSignatureImgSrc(): ?string;
 
+	public function getSupplierLogoImgSrc(): ?string;
+
 	public function getSupplier(): Participant;
 
 	public function getCustomer(): Participant;
