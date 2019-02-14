@@ -149,6 +149,7 @@ class Eciovni
 		$template->supplierCountry = $supplier->getCountry();
         $template->supplierIn = $supplier->getIn();
         $template->supplierTin = $supplier->getTin();
+		$template->supplierVatId = $supplier->getVatId();
 	    $template->supplierVatPayer = $supplier->isVatPayer();
         $template->supplierAccountNumber = $supplier->getAccountNumber();
     }
@@ -168,6 +169,7 @@ class Eciovni
 		$template->customerCountry = $customer->getCountry();
         $template->customerIn = $customer->getIn();
         $template->customerTin = $customer->getTin();
+		$template->customerVatId = $customer->getVatId();
         $template->customerVatPayer = $customer->isVatPayer();
         $template->customerAccountNumber = $customer->getAccountNumber();
     }

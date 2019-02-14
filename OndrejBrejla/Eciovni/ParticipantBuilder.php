@@ -35,6 +35,9 @@ class ParticipantBuilder
 	/** @var ?string */
     private $tin;
 
+	/** @var ?string */
+	private $vatId;
+
     /** @var bool */
     private $vatPayer = false;
 
@@ -66,6 +69,14 @@ class ParticipantBuilder
         $this->tin = $tin;
         return $this;
     }
+
+
+	public function setVatId(?string $vatId): self
+	{
+		$this->vatId = $vatId;
+		return $this;
+	}
+
 
 	public function setVatPayer(bool $vatPayer): self
 	{
@@ -126,6 +137,13 @@ class ParticipantBuilder
     {
         return $this->tin;
     }
+
+
+	public function getVatId(): ?string
+	{
+		return $this->vatId;
+	}
+
 
 	/**
 	 * Tells whether a participant is a vat payer (TIN might not mean he actually IS a vat payer)

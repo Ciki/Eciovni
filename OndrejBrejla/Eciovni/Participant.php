@@ -35,6 +35,8 @@ interface Participant
      */
     public function getTin(): ?string;
 
+	public function getVatId(): ?string;
+
 	/**
 	 * Tells whether a participant is a vat payer (TIN might not mean he actually IS a vat payer)
 	 */
