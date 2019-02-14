@@ -11,64 +11,67 @@ namespace OndrejBrejla\Eciovni;
  */
 class ParticipantBuilder
 {
-    /** @var string */
-    private $name;
+	/** @var string */
+	private $name;
 
-    /** @var string */
-    private $street;
+	/** @var string */
+	private $street;
 
-    /** @var string */
-    private $houseNumber;
+	/** @var string */
+	private $houseNumber;
 
-    /** @var string */
-    private $city;
+	/** @var string */
+	private $city;
 
-    /** @var string */
-    private $zip;
+	/** @var string */
+	private $zip;
 
 	/** @var string */
 	private $country;
 
 	/** @var ?string */
-    private $in;
+	private $in;
 
 	/** @var ?string */
-    private $tin;
+	private $tin;
 
 	/** @var ?string */
 	private $vatId;
 
-    /** @var bool */
-    private $vatPayer = false;
+	/** @var bool */
+	private $vatPayer = false;
 
-    /** @var string|null */
-    private $accountNumber;
+	/** @var ?string */
+	private $registryInfo;
+
+	/** @var ?string */
+	private $accountNumber;
 
 
 	public function __construct(string $name, string $street, string $houseNumber,
 		string $city, string $zip, string $country)
 	{
-        $this->name = $name;
-        $this->street = $street;
-        $this->houseNumber = $houseNumber;
-        $this->city = $city;
-        $this->zip = $zip;
+		$this->name = $name;
+		$this->street = $street;
+		$this->houseNumber = $houseNumber;
+		$this->city = $city;
+		$this->zip = $zip;
 		$this->country = $country;
-    }
+	}
 
 
-    public function setIn(?string $in): self
-    {
-        $this->in = $in;
-        return $this;
-    }
+	public function setIn(?string $in): self
+	{
+		$this->in = $in;
+		return $this;
+	}
 
 
 	public function setTin(?string $tin): self
 	{
-        $this->tin = $tin;
-        return $this;
-    }
+		$this->tin = $tin;
+		return $this;
+	}
 
 
 	public function setVatId(?string $vatId): self
@@ -84,41 +87,49 @@ class ParticipantBuilder
 		return $this;
 	}
 
-    public function setAccountNumber(?string $accountNumber): self
-    {
-        $this->accountNumber = $accountNumber;
-        return $this;
-    }
+
+	public function setRegistryInfo(?string $info): self
+	{
+		$this->registryInfo = $info;
+		return $this;
+	}
 
 
-    public function getName(): string
-    {
-        return $this->name;
-    }
+	public function setAccountNumber(?string $accountNumber): self
+	{
+		$this->accountNumber = $accountNumber;
+		return $this;
+	}
 
 
-    public function getStreet(): string
-    {
-        return $this->street;
-    }
+	public function getName(): string
+	{
+		return $this->name;
+	}
 
 
-    public function getHouseNumber(): string
-    {
-        return $this->houseNumber;
-    }
+	public function getStreet(): string
+	{
+		return $this->street;
+	}
 
 
-    public function getCity(): string
-    {
-        return $this->city;
-    }
+	public function getHouseNumber(): string
+	{
+		return $this->houseNumber;
+	}
 
 
-    public function getZip(): string
-    {
-        return $this->zip;
-    }
+	public function getCity(): string
+	{
+		return $this->city;
+	}
+
+
+	public function getZip(): string
+	{
+		return $this->zip;
+	}
 
 
 	public function getCountry(): string
@@ -127,16 +138,16 @@ class ParticipantBuilder
 	}
 
 
-    public function getIn(): ?string
-    {
-        return $this->in;
-    }
+	public function getIn(): ?string
+	{
+		return $this->in;
+	}
 
 
-    public function getTin(): ?string
-    {
-        return $this->tin;
-    }
+	public function getTin(): ?string
+	{
+		return $this->tin;
+	}
 
 
 	public function getVatId(): ?string
@@ -153,19 +164,23 @@ class ParticipantBuilder
 		return $this->vatPayer;
 	}
 
-    /**
-     * Returns the account number of participant.
-     */
-    public function getAccountNumber(): ?string
-    {
-        return $this->accountNumber;
-    }
+
+	public function getRegistryInfo(): ?string
+	{
+		return $this->registryInfo;
+	}
 
 
-    public function build(): Participant
-    {
-        return new ParticipantImpl($this);
-    }
+	public function getAccountNumber(): ?string
+	{
+		return $this->accountNumber;
+	}
+
+
+	public function build(): Participant
+	{
+		return new ParticipantImpl($this);
+	}
 
 
 }

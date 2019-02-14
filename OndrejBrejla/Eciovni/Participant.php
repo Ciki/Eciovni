@@ -13,34 +13,36 @@ namespace OndrejBrejla\Eciovni;
 interface Participant
 {
 
-    public function getName(): string;
+	public function getName(): string;
 
-    public function getStreet(): string;
+	public function getStreet(): string;
 
-    public function getHouseNumber(): string;
+	public function getHouseNumber(): string;
 
-    public function getCity(): string;
+	public function getCity(): string;
 
-    public function getZip(): string;
+	public function getZip(): string;
 
 	public function getCountry(): string;
 
-    /**
-     * Returns the identification number of participant.
-     */
-    public function getIn(): ?string;
+	/**
+	 * Returns the identification number of participant.
+	 */
+	public function getIn(): ?string;
 
-    /**
-     * Returns the tax identification number of participant.
-     */
-    public function getTin(): ?string;
+	/**
+	 * Returns the tax identification number of participant.
+	 */
+	public function getTin(): ?string;
 
 	public function getVatId(): ?string;
 
 	/**
 	 * Tells whether a participant is a vat payer (TIN might not mean he actually IS a vat payer)
 	 */
-    public function isVatPayer(): bool;
+	public function isVatPayer(): bool;
 
-    public function getAccountNumber(): ?string;
+	public function getRegistryInfo(): ?string;
+
+	public function getAccountNumber(): ?string;
 }

@@ -12,84 +12,88 @@ namespace OndrejBrejla\Eciovni;
  */
 class ParticipantImpl implements Participant
 {
-    /** @var string */
-    private $name;
+	/** @var string */
+	private $name;
 
-    /** @var string */
-    private $street;
+	/** @var string */
+	private $street;
 
-    /** @var string */
-    private $houseNumber;
+	/** @var string */
+	private $houseNumber;
 
-    /** @var string */
-    private $city;
+	/** @var string */
+	private $city;
 
-    /** @var string */
-    private $zip;
+	/** @var string */
+	private $zip;
 
-    /** @var string */
+	/** @var string */
 	private $country;
 
 	/** @var ?string */
-    private $in;
+	private $in;
 
 	/** @var ?string */
-    private $tin;
+	private $tin;
 
 	/** @var ?string */
 	private $vatId;
 
-    /** @var bool */
-    private $vatPayer;
+	/** @var bool */
+	private $vatPayer;
 
 	/** @var ?string */
-    private $accountNumber;
+	private $registryInfo;
+
+	/** @var ?string */
+	private $accountNumber;
 
 
 	public function __construct(ParticipantBuilder $participantBuilder)
 	{
-        $this->name = $participantBuilder->getName();
-        $this->street = $participantBuilder->getStreet();
-        $this->houseNumber = $participantBuilder->getHouseNumber();
-        $this->city = $participantBuilder->getCity();
-        $this->zip = $participantBuilder->getZip();
+		$this->name = $participantBuilder->getName();
+		$this->street = $participantBuilder->getStreet();
+		$this->houseNumber = $participantBuilder->getHouseNumber();
+		$this->city = $participantBuilder->getCity();
+		$this->zip = $participantBuilder->getZip();
 		$this->country = $participantBuilder->getCountry();
-        $this->in = $participantBuilder->getIn();
-        $this->tin = $participantBuilder->getTin();
+		$this->in = $participantBuilder->getIn();
+		$this->tin = $participantBuilder->getTin();
 		$this->vatId = $participantBuilder->getVatId();
-        $this->vatPayer = $participantBuilder->isVatPayer();
-        $this->accountNumber = $participantBuilder->getAccountNumber();
-    }
+		$this->vatPayer = $participantBuilder->isVatPayer();
+		$this->registryInfo = $participantBuilder->getRegistryInfo();
+		$this->accountNumber = $participantBuilder->getAccountNumber();
+	}
 
 
-    public function getName(): string
-    {
-        return $this->name;
-    }
+	public function getName(): string
+	{
+		return $this->name;
+	}
 
 
-    public function getStreet(): string
-    {
-        return $this->street;
-    }
+	public function getStreet(): string
+	{
+		return $this->street;
+	}
 
 
-    public function getHouseNumber(): string
-    {
-        return $this->houseNumber;
-    }
+	public function getHouseNumber(): string
+	{
+		return $this->houseNumber;
+	}
 
 
-    public function getCity(): string
-    {
-        return $this->city;
-    }
+	public function getCity(): string
+	{
+		return $this->city;
+	}
 
 
-    public function getZip(): string
-    {
-        return $this->zip;
-    }
+	public function getZip(): string
+	{
+		return $this->zip;
+	}
 
 
 	public function getCountry(): string
@@ -98,22 +102,22 @@ class ParticipantImpl implements Participant
 	}
 
 
-    /**
-     * Returns the identification number of participant.
-     */
-    public function getIn(): ?string
-    {
-        return $this->in;
-    }
+	/**
+	 * Returns the identification number of participant.
+	 */
+	public function getIn(): ?string
+	{
+		return $this->in;
+	}
 
 
-    /**
-     * Returns the tax identification number of participant.
-     */
-    public function getTin(): ?string
-    {
-        return $this->tin;
-    }
+	/**
+	 * Returns the tax identification number of participant.
+	 */
+	public function getTin(): ?string
+	{
+		return $this->tin;
+	}
 
 
 	public function getVatId(): ?string
@@ -130,10 +134,17 @@ class ParticipantImpl implements Participant
 		return $this->vatPayer;
 	}
 
-    public function getAccountNumber(): ?string
-    {
-        return $this->accountNumber;
-    }
+
+	public function getRegistryInfo(): ?string
+	{
+		return $this->registryInfo;
+	}
+
+
+	public function getAccountNumber(): ?string
+	{
+		return $this->accountNumber;
+	}
 
 
 }
