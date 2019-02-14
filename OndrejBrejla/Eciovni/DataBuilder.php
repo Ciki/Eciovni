@@ -67,56 +67,21 @@ class DataBuilder
         $this->addItems($items);
     }
 
+
+	/**
+	 * Same as DataImpl methods declarations below
+	 */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+
 	public function getCaption(): ?string
 	{
 		return $this->caption;
 	}
 
-	public function setCaption(?string $caption): void
-	{
-		$this->caption = $caption;
-	}
-
-    /** @param Item[] $items */
-    private function addItems(array $items): void
-    {
-        foreach ($items as $item) {
-            $this->addItem($item);
-        }
-    }
-
-    private function addItem(Item $item): void
-    {
-        $this->items[] = $item;
-    }
-
-    public function setVariableSymbol(?string $variableSymbol): self
-    {
-        $this->variableSymbol = $variableSymbol;
-        return $this;
-    }
-
-    public function setConstantSymbol(?string $constantSymbol): self
-    {
-        $this->constantSymbol = $constantSymbol;
-        return $this;
-    }
-
-    public function setSpecificSymbol(?string $specificSymbol): self
-    {
-        $this->specificSymbol = $specificSymbol;
-        return $this;
-    }
-
-    public function setDateOfVatRevenueRecognition(DateTime $dateOfTaxablePayment): self {
-        $this->dateOfVatRevenueRecognition = $dateOfTaxablePayment;
-        return $this;
-    }
-
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
 
     public function getId(): string
     {
@@ -180,5 +145,58 @@ class DataBuilder
     {
         return new DataImpl($this);
     }
+
+
+	/**
+	 * Same as DataImpl methods declarations above END
+	 */
+	public function setCaption(?string $caption): void
+	{
+		$this->caption = $caption;
+}
+
+
+	/** @param Item[] $items */
+	private function addItems(array $items): void
+	{
+		foreach ($items as $item) {
+			$this->addItem($item);
+		}
+	}
+
+
+	private function addItem(Item $item): void
+	{
+		$this->items[] = $item;
+	}
+
+
+	public function setVariableSymbol(?string $variableSymbol): self
+	{
+		$this->variableSymbol = $variableSymbol;
+		return $this;
+	}
+
+
+	public function setConstantSymbol(?string $constantSymbol): self
+	{
+		$this->constantSymbol = $constantSymbol;
+		return $this;
+	}
+
+
+	public function setSpecificSymbol(?string $specificSymbol): self
+	{
+		$this->specificSymbol = $specificSymbol;
+		return $this;
+	}
+
+
+	public function setDateOfVatRevenueRecognition(?DateTime $dateOfTaxablePayment): self
+	{
+		$this->dateOfVatRevenueRecognition = $dateOfTaxablePayment;
+		return $this;
+	}
+
 
 }
