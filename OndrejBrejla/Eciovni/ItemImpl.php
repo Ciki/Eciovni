@@ -22,15 +22,20 @@ class ItemImpl implements Item
     /** @var Money */
     private $unitValue;
 
+	/** @var string */
+	private $unitType;
+
     /** @var int */
     private $units;
 
     /** @var boolean */
     private $unitValueIsTaxed;
 
-    public function __construct(string $description, int $units, Money $unitValue, Tax $tax, bool $unitValueIsTaxed = true)
+	public function __construct(string $description, string $unitType, int $units,
+		Money $unitValue, Tax $tax, bool $unitValueIsTaxed = true)
     {
         $this->description = $description;
+		$this->unitType = $unitType;
         $this->units = $units;
         $this->unitValue = $unitValue;
         $this->tax = $tax;
@@ -54,6 +59,13 @@ class ItemImpl implements Item
     {
         return $this->unitValue;
     }
+
+
+	public function getUnitType(): string
+	{
+		return $this->unitType;
+	}
+
 
     public function isUnitValueTaxed(): bool
     {

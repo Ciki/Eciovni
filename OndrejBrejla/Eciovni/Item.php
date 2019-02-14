@@ -19,6 +19,8 @@ interface Item
 
     public function getUnitValue(): Money;
 
+	public function getUnitType(): string;
+
     public function getUnits(): int;
 
     /**
