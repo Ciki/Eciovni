@@ -48,6 +48,9 @@ class DataImpl implements Data
     private $dateOfIssuance;
 
 	/** @var ?DateTime */
+	private $dateOfDelivery;
+
+	/** @var ?DateTime */
     private $dateOfVatRevenueRecognition;
 
     /** @var Item[] */
@@ -65,6 +68,7 @@ class DataImpl implements Data
         $this->specificSymbol = $dataBuilder->getSpecificSymbol();
         $this->expirationDate = $dataBuilder->getExpirationDate();
         $this->dateOfIssuance = $dataBuilder->getDateOfIssuance();
+		$this->dateOfDelivery = $dataBuilder->getDateOfDelivery();
         $this->dateOfVatRevenueRecognition = $dataBuilder->getDateOfVatRevenueRecognition();
         $this->items = $dataBuilder->getItems();
     }
@@ -125,6 +129,13 @@ class DataImpl implements Data
     {
         return $this->dateOfIssuance->format($format);
     }
+
+
+	public function getDateOfDelivery(string $format = 'd.m.Y'): string
+	{
+		return $this->dateOfDelivery ? $this->dateOfDelivery->format($format) : '';
+	}
+
 
     public function getDateOfVatRevenueRecognition(string $format = 'd.m.Y'): string
     {

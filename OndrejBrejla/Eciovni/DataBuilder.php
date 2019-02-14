@@ -48,6 +48,9 @@ class DataBuilder
     private $dateOfIssuance;
 
 	/** @var ?DateTime */
+	private $dateOfDelivery;
+
+	/** @var ?DateTime */
     private $dateOfVatRevenueRecognition;
 
     /** @var Item[] */
@@ -130,6 +133,13 @@ class DataBuilder
         return $this->dateOfIssuance;
     }
 
+
+	public function getDateOfDelivery(): ?DateTime
+	{
+		return $this->dateOfDelivery;
+	}
+
+
     public function getDateOfVatRevenueRecognition(): ?DateTime
     {
         return $this->dateOfVatRevenueRecognition;
@@ -188,6 +198,13 @@ class DataBuilder
 	public function setSpecificSymbol(?string $specificSymbol): self
 	{
 		$this->specificSymbol = $specificSymbol;
+		return $this;
+	}
+
+
+	public function setDateOfDelivery(?DateTime $dateOfDelivery): self
+	{
+		$this->dateOfDelivery = $dateOfDelivery;
 		return $this;
 	}
 

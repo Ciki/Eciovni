@@ -163,6 +163,7 @@ class Eciovni
     private function generateDates(Template $template): void
     {
         $template->dateOfIssuance = $this->data->getDateOfIssuance();
+        $template->dateOfDelivery = $this->data->getDateOfDelivery();
         $template->expirationDate = $this->data->getExpirationDate();
         $template->dateOfVatRevenueRecognition = $this->data->getDateOfVatRevenueRecognition();
     }

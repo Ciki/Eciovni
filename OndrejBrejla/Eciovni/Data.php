@@ -40,7 +40,9 @@ interface Data
 
     public function getDateOfIssuance(string $format = 'd.m.Y'): string;
 
-    public function getDateOfVatRevenueRecognition(string $format = 'd.m.Y'): string;
+	public function getDateOfDelivery(string $format = 'd.m.Y'): string;
+
+	public function getDateOfVatRevenueRecognition(string $format = 'd.m.Y'): string;
 
     /** @return Item[] */
     public function getItems(): array;
