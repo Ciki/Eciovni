@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
 
@@ -18,12 +19,11 @@ interface Tax
 	 */
 	public function inPercentage(): float;
 
-    /**
-     * Returns tax in a upper decimal format.
-     * I.e. '1.22' for '22%'.
-     */
-    public function inUpperDecimal(): float;
+	/**
+	 * Returns tax in a upper decimal format.
+	 * I.e. '1.22' for '22%'.
+	 */
+	public function inUpperDecimal(): float;
 
-    public function asCoefficient(): float;
-
+	public function asCoefficient(): float;
 }

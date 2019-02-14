@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
 
@@ -11,7 +12,6 @@ namespace OndrejBrejla\Eciovni;
  */
 class ParticipantImpl implements Participant
 {
-
     /** @var string */
     private $name;
 
@@ -39,7 +39,9 @@ class ParticipantImpl implements Participant
 	/** @var ?string */
     private $accountNumber;
 
-    public function __construct(ParticipantBuilder $participantBuilder) {
+
+	public function __construct(ParticipantBuilder $participantBuilder)
+	{
         $this->name = $participantBuilder->getName();
         $this->street = $participantBuilder->getStreet();
         $this->houseNumber = $participantBuilder->getHouseNumber();
@@ -51,25 +53,30 @@ class ParticipantImpl implements Participant
         $this->accountNumber = $participantBuilder->getAccountNumber();
     }
 
+
     public function getName(): string
     {
         return $this->name;
     }
+
 
     public function getStreet(): string
     {
         return $this->street;
     }
 
+
     public function getHouseNumber(): string
     {
         return $this->houseNumber;
     }
 
+
     public function getCity(): string
     {
         return $this->city;
     }
+
 
     public function getZip(): string
     {
@@ -83,6 +90,7 @@ class ParticipantImpl implements Participant
     {
         return $this->in;
     }
+
 
     /**
      * Returns the tax identification number of participant.
@@ -104,5 +112,6 @@ class ParticipantImpl implements Participant
     {
         return $this->accountNumber;
     }
+
 
 }

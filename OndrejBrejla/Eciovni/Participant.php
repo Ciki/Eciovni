@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
 
@@ -38,5 +39,4 @@ interface Participant
     public function isVatPayer(): bool;
 
     public function getAccountNumber(): ?string;
-
 }

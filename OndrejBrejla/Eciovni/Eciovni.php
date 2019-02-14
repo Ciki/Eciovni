@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
 
@@ -17,7 +18,6 @@ use Nette\Bridges\ApplicationLatte\Template;
  */
 class Eciovni
 {
-
     /** @var Data|null */
     private $data;
 
@@ -27,7 +27,9 @@ class Eciovni
     /** @var string */
     private $templatePath;
 
-	public function __construct(?Data $data, ITemplateFactory $templateFactory, LinkGenerator $linkGenerator)
+
+	public function __construct(?Data $data, ITemplateFactory $templateFactory,
+		LinkGenerator $linkGenerator)
 	{
 		if ($data !== null) {
             $this->setData($data);
@@ -42,15 +44,18 @@ class Eciovni
 		$this->template->getLatte()->addProvider('uiControl', $linkGenerator);
 	}
 
+
     public function setTemplatePath(string $templatePath): void
     {
         $this->templatePath = $templatePath;
     }
 
+
     /**
      * Exports Invoice template via passed mPDF.
      */
-    public function exportToPdf(Mpdf $mpdf, ?string $name = null, ?string $dest = null): ?string
+	public function exportToPdf(Mpdf $mpdf, ?string $name = null,
+		?string $dest = null): ?string
     {
         $this->generate($this->template);
         $mpdf->WriteHTML((string) $this->template);
@@ -66,10 +71,12 @@ class Eciovni
         return $result;
     }
 
+
     public function render(): void
     {
         $this->processRender();
     }
+
 
     /**
      * Renderers the invoice to the defined template.
@@ -80,6 +87,7 @@ class Eciovni
         $this->processRender();
     }
 
+
     /**
      * Renderers the invoice to the defined template.
      */
@@ -88,6 +96,7 @@ class Eciovni
         $this->generate($this->template);
         $this->template->render();
     }
+
 
     /**
      * Sets the data, but only if it hasn't been set already.
@@ -100,6 +109,7 @@ class Eciovni
 
 	    $this->data = $data;
     }
+
 
     /**
      * Generates the invoice to the defined template.
@@ -123,6 +133,7 @@ class Eciovni
         $this->generateFinalValues($template);
     }
 
+
     /**
      * Generates supplier data into template.
      */
@@ -139,6 +150,7 @@ class Eciovni
 	    $template->supplierVatPayer = $supplier->isVatPayer();
         $template->supplierAccountNumber = $supplier->getAccountNumber();
     }
+
 
     /**
      * Generates customer data into template.
@@ -157,6 +169,7 @@ class Eciovni
         $template->customerAccountNumber = $customer->getAccountNumber();
     }
 
+
     /**
      * Generates dates into template.
      */
@@ -168,6 +181,7 @@ class Eciovni
         $template->dateOfVatRevenueRecognition = $this->data->getDateOfVatRevenueRecognition();
     }
 
+
     /**
      * Generates symbols into template.
      */
@@ -178,6 +192,7 @@ class Eciovni
         $template->constantSymbol = $this->data->getConstantSymbol();
     }
 
+
     /**
      * Generates final values into template.
      */
@@ -187,6 +202,7 @@ class Eciovni
         $template->finalTaxValue = $this->countFinalTaxValue();
         $template->finalValue = $this->countFinalValues();
     }
+
 
     /**
      * Counts final untaxed value of all items.
@@ -206,6 +222,7 @@ class Eciovni
         return $sum;
     }
 
+
     /**
      * Counts final tax value of all items.
      */
@@ -224,6 +241,7 @@ class Eciovni
         return $sum;
     }
 
+
     /**
      * Counts final value of all items.
      */
@@ -241,5 +259,6 @@ class Eciovni
 
         return $sum;
     }
+
 
 }

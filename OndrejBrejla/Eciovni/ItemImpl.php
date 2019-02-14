@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
 
@@ -12,53 +13,56 @@ use Money\Money;
  */
 class ItemImpl implements Item
 {
+	/** @var string */
+	private $description;
 
-    /** @var string */
-    private $description;
+	/** @var Tax */
+	private $tax;
 
-    /** @var Tax */
-    private $tax;
-
-    /** @var Money */
-    private $unitValue;
+	/** @var Money */
+	private $unitValue;
 
 	/** @var string */
 	private $unitType;
 
-    /** @var int */
-    private $units;
+	/** @var int */
+	private $units;
 
-    /** @var boolean */
-    private $unitValueIsTaxed;
+	/** @var boolean */
+	private $unitValueIsTaxed;
+
 
 	public function __construct(string $description, string $unitType, int $units,
 		Money $unitValue, Tax $tax, bool $unitValueIsTaxed = true)
-    {
-        $this->description = $description;
+	{
+		$this->description = $description;
 		$this->unitType = $unitType;
-        $this->units = $units;
-        $this->unitValue = $unitValue;
-        $this->tax = $tax;
-        $this->unitValueIsTaxed = $unitValueIsTaxed;
-    }
+		$this->units = $units;
+		$this->unitValue = $unitValue;
+		$this->tax = $tax;
+		$this->unitValueIsTaxed = $unitValueIsTaxed;
+	}
 
-    public function getDescription(): string
-    {
-        return $this->description;
-    }
 
-    public function getTax(): Tax
-    {
-        return $this->tax;
-    }
+	public function getDescription(): string
+	{
+		return $this->description;
+	}
 
-    /**
-     * Returns the value of one unit of the item.
-     */
-    public function getUnitValue(): Money
-    {
-        return $this->unitValue;
-    }
+
+	public function getTax(): Tax
+	{
+		return $this->tax;
+	}
+
+
+	/**
+	 * Returns the value of one unit of the item.
+	 */
+	public function getUnitValue(): Money
+	{
+		return $this->unitValue;
+	}
 
 
 	public function getUnitType(): string
@@ -67,54 +71,60 @@ class ItemImpl implements Item
 	}
 
 
-    public function isUnitValueTaxed(): bool
-    {
-        return $this->unitValueIsTaxed;
-    }
+	public function isUnitValueTaxed(): bool
+	{
+		return $this->unitValueIsTaxed;
+	}
 
-    public function getUnits(): int
-    {
-        return $this->units;
-    }
 
-    /**
-     * Returns the value of taxes for all units.
-     */
-    public function countTaxValue(): Money
-    {
-        return $this->countTaxedUnitValue()->subtract($this->countUntaxedUnitValue())->multiply($this->getUnits());
-    }
+	public function getUnits(): int
+	{
+		return $this->units;
+	}
 
-    /**
-     * Returns the taxed value of one unit.
-     */
-    private function countTaxedUnitValue(): Money
-    {
-        if ($this->isUnitValueTaxed()) {
-            return $this->getUnitValue();
-        }
 
-	    return $this->getUnitValue()->multiply($this->getTax()->inUpperDecimal());
-    }
+	/**
+	 * Returns the value of taxes for all units.
+	 */
+	public function countTaxValue(): Money
+	{
+		return $this->countTaxedUnitValue()->subtract($this->countUntaxedUnitValue())->multiply($this->getUnits());
+	}
 
-    /**
-     * Returns the value of unit without tax.
-     */
-    public function countUntaxedUnitValue(): Money
-    {
-        if ($this->isUnitValueTaxed()) {
-            return $this->getUnitValue()->subtract($this->getUnitValue()->multiply($this->getTax()->asCoefficient()));
-        }
 
-	    return $this->getUnitValue();
-    }
+	/**
+	 * Returns the taxed value of one unit.
+	 */
+	private function countTaxedUnitValue(): Money
+	{
+		if ($this->isUnitValueTaxed()) {
+			return $this->getUnitValue();
+		}
 
-    /**
-     * Returns the final value of all taxed units.
-     */
-    public function countFinalValue(): Money
-    {
-        return $this->countTaxedUnitValue()->multiply($this->getUnits());
-    }
+		return $this->getUnitValue()->multiply($this->getTax()->inUpperDecimal());
+	}
+
+
+	/**
+	 * Returns the value of unit without tax.
+	 */
+	public function countUntaxedUnitValue(): Money
+	{
+		if ($this->isUnitValueTaxed()) {
+			return $this->getUnitValue()->subtract($this->getUnitValue()->multiply($this->getTax()->asCoefficient()));
+		}
+
+		return $this->getUnitValue();
+	}
+
+
+	/**
+	 * Returns the final value of all taxed units.
+	 */
+	public function countFinalValue(): Money
+	{
+		return $this->countTaxedUnitValue()->multiply($this->getUnits());
+	}
+
 
 }

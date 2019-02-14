@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
 
@@ -13,90 +14,96 @@ use DateTime;
  */
 class DataImpl implements Data
 {
-
-    /** @var string */
-    private $title;
+	/** @var string */
+	private $title;
 
 	/** @var ?string */
-    private $caption;
+	private $caption;
 
-    /** @var string */
-    private $id;
+	/** @var string */
+	private $id;
 
-    /** @var Participant */
-    private $supplier;
+	/** @var Participant */
+	private $supplier;
 
-    /** @var Participant */
-    private $customer;
+	/** @var Participant */
+	private $customer;
 
 	/** @var ?string */
 	private $paymentType;
 
 	/** @var ?string */
-    private $variableSymbol;
+	private $variableSymbol;
 
 	/** @var ?string */
-    private $constantSymbol;
+	private $constantSymbol;
 
 	/** @var ?string */
-    private $specificSymbol;
+	private $specificSymbol;
 
-    /** @var DateTime */
-    private $expirationDate;
+	/** @var DateTime */
+	private $expirationDate;
 
-    /** @var DateTime */
-    private $dateOfIssuance;
+	/** @var DateTime */
+	private $dateOfIssuance;
 
 	/** @var ?DateTime */
 	private $dateOfDelivery;
 
 	/** @var ?DateTime */
-    private $dateOfVatRevenueRecognition;
+	private $dateOfVatRevenueRecognition;
 
-    /** @var Item[] */
-    private $items = [];
+	/** @var Item[] */
+	private $items = [];
 
-    public function __construct(DataBuilder $dataBuilder) {
-        $this->title = $dataBuilder->getTitle();
-        $this->caption = $dataBuilder->getCaption();
-        $this->id = $dataBuilder->getId();
-        $this->supplier = $dataBuilder->getSupplier();
-        $this->customer = $dataBuilder->getCustomer();
+
+	public function __construct(DataBuilder $dataBuilder)
+	{
+		$this->title = $dataBuilder->getTitle();
+		$this->caption = $dataBuilder->getCaption();
+		$this->id = $dataBuilder->getId();
+		$this->supplier = $dataBuilder->getSupplier();
+		$this->customer = $dataBuilder->getCustomer();
 		$this->paymentType = $dataBuilder->getPaymentType();
-        $this->variableSymbol = $dataBuilder->getVariableSymbol();
-        $this->constantSymbol = $dataBuilder->getConstantSymbol();
-        $this->specificSymbol = $dataBuilder->getSpecificSymbol();
-        $this->expirationDate = $dataBuilder->getExpirationDate();
-        $this->dateOfIssuance = $dataBuilder->getDateOfIssuance();
+		$this->variableSymbol = $dataBuilder->getVariableSymbol();
+		$this->constantSymbol = $dataBuilder->getConstantSymbol();
+		$this->specificSymbol = $dataBuilder->getSpecificSymbol();
+		$this->expirationDate = $dataBuilder->getExpirationDate();
+		$this->dateOfIssuance = $dataBuilder->getDateOfIssuance();
 		$this->dateOfDelivery = $dataBuilder->getDateOfDelivery();
-        $this->dateOfVatRevenueRecognition = $dataBuilder->getDateOfVatRevenueRecognition();
-        $this->items = $dataBuilder->getItems();
-    }
+		$this->dateOfVatRevenueRecognition = $dataBuilder->getDateOfVatRevenueRecognition();
+		$this->items = $dataBuilder->getItems();
+	}
 
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
+
+	public function getTitle(): string
+	{
+		return $this->title;
+	}
+
 
 	public function getCaption(): ?string
 	{
 		return $this->caption;
 	}
 
-    public function getId(): string
-    {
-        return $this->id;
-    }
 
-    public function getSupplier(): Participant
-    {
-        return $this->supplier;
-    }
+	public function getId(): string
+	{
+		return $this->id;
+	}
 
-    public function getCustomer(): Participant
-    {
-        return $this->customer;
-    }
+
+	public function getSupplier(): Participant
+	{
+		return $this->supplier;
+	}
+
+
+	public function getCustomer(): Participant
+	{
+		return $this->customer;
+	}
 
 
 	public function getPaymentType(): ?string
@@ -105,30 +112,34 @@ class DataImpl implements Data
 	}
 
 
-    public function getVariableSymbol(): ?string
-    {
-        return $this->variableSymbol;
-    }
+	public function getVariableSymbol(): ?string
+	{
+		return $this->variableSymbol;
+	}
 
-    public function getConstantSymbol(): ?string
-    {
-        return $this->constantSymbol;
-    }
 
-    public function getSpecificSymbol(): ?string
-    {
-        return $this->specificSymbol;
-    }
+	public function getConstantSymbol(): ?string
+	{
+		return $this->constantSymbol;
+	}
 
-    public function getExpirationDate(string $format = 'd.m.Y'): string
-    {
-        return $this->expirationDate->format($format);
-    }
 
-    public function getDateOfIssuance(string $format = 'd.m.Y'): string
-    {
-        return $this->dateOfIssuance->format($format);
-    }
+	public function getSpecificSymbol(): ?string
+	{
+		return $this->specificSymbol;
+	}
+
+
+	public function getExpirationDate(string $format = 'd.m.Y'): string
+	{
+		return $this->expirationDate->format($format);
+	}
+
+
+	public function getDateOfIssuance(string $format = 'd.m.Y'): string
+	{
+		return $this->dateOfIssuance->format($format);
+	}
 
 
 	public function getDateOfDelivery(string $format = 'd.m.Y'): string
@@ -137,15 +148,17 @@ class DataImpl implements Data
 	}
 
 
-    public function getDateOfVatRevenueRecognition(string $format = 'd.m.Y'): string
-    {
-        return $this->dateOfVatRevenueRecognition === null ? '' : $this->dateOfVatRevenueRecognition->format($format);
-    }
+	public function getDateOfVatRevenueRecognition(string $format = 'd.m.Y'): string
+	{
+		return $this->dateOfVatRevenueRecognition ? $this->dateOfVatRevenueRecognition->format($format) : '';
+	}
 
-    /** @return Item[] */
-    public function getItems(): array
-    {
-        return $this->items;
-    }
+
+	/** @return Item[] */
+	public function getItems(): array
+	{
+		return $this->items;
+	}
+
 
 }

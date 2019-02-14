@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
 
@@ -13,71 +14,71 @@ use DateTime;
  */
 class DataBuilder
 {
-
-    /** @var string */
-    private $title;
+	/** @var string */
+	private $title;
 
 	/** @var ?string */
 	private $caption;
 
-    /** @var string */
-    private $id;
+	/** @var string */
+	private $id;
 
-    /** @var Participant */
-    private $supplier;
+	/** @var Participant */
+	private $supplier;
 
-    /** @var Participant */
-    private $customer;
+	/** @var Participant */
+	private $customer;
 
 	/** @var ?string */
 	private $paymentType;
 
 	/** @var ?string */
-    private $variableSymbol;
+	private $variableSymbol;
 
 	/** @var ?string */
-    private $constantSymbol;
+	private $constantSymbol;
 
 	/** @var ?string */
-    private $specificSymbol;
+	private $specificSymbol;
 
-    /** @var DateTime */
-    private $expirationDate;
+	/** @var DateTime */
+	private $expirationDate;
 
-    /** @var DateTime */
-    private $dateOfIssuance;
+	/** @var DateTime */
+	private $dateOfIssuance;
 
 	/** @var ?DateTime */
 	private $dateOfDelivery;
 
 	/** @var ?DateTime */
-    private $dateOfVatRevenueRecognition;
+	private $dateOfVatRevenueRecognition;
 
-    /** @var Item[] */
-    private $items = [];
+	/** @var Item[] */
+	private $items = [];
+
 
 	public function __construct(string $id, string $title, Participant $supplier,
 		Participant $customer, DateTime $expirationDate, DateTime $dateOfIssuance,
 		array $items, string $paymentType)
-    {
-        $this->id = $id;
-        $this->title = $title;
-        $this->supplier = $supplier;
-        $this->customer = $customer;
+	{
+		$this->id = $id;
+		$this->title = $title;
+		$this->supplier = $supplier;
+		$this->customer = $customer;
 		$this->paymentType = $paymentType;
-        $this->expirationDate = $expirationDate;
-        $this->dateOfIssuance = $dateOfIssuance;
-        $this->addItems($items);
-    }
+		$this->expirationDate = $expirationDate;
+		$this->dateOfIssuance = $dateOfIssuance;
+		$this->addItems($items);
+	}
 
 
 	/**
 	 * Same as DataImpl methods declarations below
 	 */
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
+	public function getTitle(): string
+	{
+		return $this->title;
+	}
 
 
 	public function getCaption(): ?string
@@ -86,20 +87,22 @@ class DataBuilder
 	}
 
 
-    public function getId(): string
-    {
-        return $this->id;
-    }
+	public function getId(): string
+	{
+		return $this->id;
+	}
 
-    public function getSupplier(): Participant
-    {
-        return $this->supplier;
-    }
 
-    public function getCustomer(): Participant
-    {
-        return $this->customer;
-    }
+	public function getSupplier(): Participant
+	{
+		return $this->supplier;
+	}
+
+
+	public function getCustomer(): Participant
+	{
+		return $this->customer;
+	}
 
 
 	public function getPaymentType(): ?string
@@ -108,30 +111,34 @@ class DataBuilder
 	}
 
 
-    public function getVariableSymbol(): ?string
-    {
-        return $this->variableSymbol;
-    }
+	public function getVariableSymbol(): ?string
+	{
+		return $this->variableSymbol;
+	}
 
-    public function getConstantSymbol(): ?string
-    {
-        return $this->constantSymbol;
-    }
 
-    public function getSpecificSymbol(): ?string
-    {
-        return $this->specificSymbol;
-    }
+	public function getConstantSymbol(): ?string
+	{
+		return $this->constantSymbol;
+	}
 
-    public function getExpirationDate(): DateTime
-    {
-        return $this->expirationDate;
-    }
 
-    public function getDateOfIssuance(): DateTime
-    {
-        return $this->dateOfIssuance;
-    }
+	public function getSpecificSymbol(): ?string
+	{
+		return $this->specificSymbol;
+	}
+
+
+	public function getExpirationDate(): DateTime
+	{
+		return $this->expirationDate;
+	}
+
+
+	public function getDateOfIssuance(): DateTime
+	{
+		return $this->dateOfIssuance;
+	}
 
 
 	public function getDateOfDelivery(): ?DateTime
@@ -140,21 +147,23 @@ class DataBuilder
 	}
 
 
-    public function getDateOfVatRevenueRecognition(): ?DateTime
-    {
-        return $this->dateOfVatRevenueRecognition;
-    }
+	public function getDateOfVatRevenueRecognition(): ?DateTime
+	{
+		return $this->dateOfVatRevenueRecognition;
+	}
 
-    /** @return Item[] */
-    public function getItems(): array
-    {
-        return $this->items;
-    }
 
-    public function build(): Data
-    {
-        return new DataImpl($this);
-    }
+	/** @return Item[] */
+	public function getItems(): array
+	{
+		return $this->items;
+	}
+
+
+	public function build(): Data
+	{
+		return new DataImpl($this);
+	}
 
 
 	/**
@@ -163,7 +172,7 @@ class DataBuilder
 	public function setCaption(?string $caption): void
 	{
 		$this->caption = $caption;
-}
+	}
 
 
 	/** @param Item[] $items */

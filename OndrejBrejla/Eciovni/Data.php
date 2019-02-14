@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
 
@@ -12,39 +13,38 @@ namespace OndrejBrejla\Eciovni;
 interface Data
 {
 
-    /**
-     * Returns the invoice title.
-     */
-    public function getTitle(): string;
+	/**
+	 * Returns the invoice title.
+	 */
+	public function getTitle(): string;
 
-    public function getCaption(): ?string;
+	public function getCaption(): ?string;
 
-    /**
-     * Returns the invoice id.
-     */
-    public function getId(): string;
+	/**
+	 * Returns the invoice id.
+	 */
+	public function getId(): string;
 
-    public function getSupplier(): Participant;
+	public function getSupplier(): Participant;
 
-    public function getCustomer(): Participant;
+	public function getCustomer(): Participant;
 
-    public function getPaymentType(): ?string;
-	
-    public function getVariableSymbol(): ?string;
+	public function getPaymentType(): ?string;
 
-    public function getConstantSymbol(): ?string;
+	public function getVariableSymbol(): ?string;
 
-    public function getSpecificSymbol(): ?string;
+	public function getConstantSymbol(): ?string;
 
-    public function getExpirationDate(string $format = 'd.m.Y'): string;
+	public function getSpecificSymbol(): ?string;
 
-    public function getDateOfIssuance(string $format = 'd.m.Y'): string;
+	public function getExpirationDate(string $format = 'd.m.Y'): string;
+
+	public function getDateOfIssuance(string $format = 'd.m.Y'): string;
 
 	public function getDateOfDelivery(string $format = 'd.m.Y'): string;
 
 	public function getDateOfVatRevenueRecognition(string $format = 'd.m.Y'): string;
 
-    /** @return Item[] */
-    public function getItems(): array;
-
+	/** @return Item[] */
+	public function getItems(): array;
 }
