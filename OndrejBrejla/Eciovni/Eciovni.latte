@@ -285,8 +285,9 @@
 			</table>
 
 			<div style="text-align: right; padding-right: 0px; margin-top:30px;" n:if="$signatureText || $signatureImgSrc">
-				Vystavil:
 				<img n:if="$signatureImgSrc" src="{$signatureImgSrc}" alt="Razítko s podpisom" />
+				<br>
+				Vystavil:
 				<span n:if="$signatureText" style="font-style: italic;">{$signatureText}</span>
 			</div>
 		</div>
