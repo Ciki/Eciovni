@@ -101,7 +101,7 @@ class Eciovni
     /**
      * Sets the data, but only if it hasn't been set already.
      */
-    private function setData(Data $data): void
+	public function setData(Data $data): void
     {
         if ($this->data !== null) {
             throw new IllegalStateException('Data have already been set!');
