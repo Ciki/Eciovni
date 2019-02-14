@@ -133,6 +133,13 @@ class Eciovni
 		$template->supplierLogoImgSrc = $this->data->getSupplierLogoImgSrc();
 		$template->paymentType = $this->data->getPaymentType();
 		$template->items = $this->data->getItems();
+		$template->discountUsed = false;
+		foreach ($template->items as $i) {
+			if ($i->getDiscountPercent()) {
+				$template->discountUsed = true;
+				break;
+			}
+		}
 		$template->currency = $template->items[0]->getUnitValue()->getCurrency();
 		$this->generateSupplier($template);
 		$this->generateCustomer($template);
@@ -226,10 +233,11 @@ class Eciovni
 		$sum = null;
 
 		foreach ($this->data->getItems() as $item) {
+			$itemTotalUntaxedValue = $item->countUntaxedUnitValue(true)->multiply($item->getUnits());
 			if ($sum === null) {
-				$sum = $item->countUntaxedUnitValue()->multiply($item->getUnits());
+				$sum = $itemTotalUntaxedValue;
 			} else {
-				$sum = $sum->add($item->countUntaxedUnitValue()->multiply($item->getUnits()));
+				$sum = $sum->add($itemTotalUntaxedValue);
 			}
 		}
 
@@ -245,10 +253,11 @@ class Eciovni
 		$sum = null;
 
 		foreach ($this->data->getItems() as $item) {
+			$itemTaxValue = $item->countTaxValue();
 			if ($sum === null) {
-				$sum = $item->countTaxValue();
+				$sum = $itemTaxValue;
 			} else {
-				$sum = $sum->add($item->countTaxValue());
+				$sum = $sum->add($itemTaxValue);
 			}
 		}
 
@@ -264,10 +273,11 @@ class Eciovni
 		$sum = null;
 
 		foreach ($this->data->getItems() as $item) {
+			$itemFinalValue = $item->countFinalValue();
 			if ($sum === null) {
-				$sum = $item->countFinalValue();
+				$sum = $itemFinalValue;
 			} else {
-				$sum = $sum->add($item->countFinalValue());
+				$sum = $sum->add($itemFinalValue);
 			}
 		}
 

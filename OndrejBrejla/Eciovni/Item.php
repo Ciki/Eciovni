@@ -24,15 +24,22 @@ interface Item
 
 	public function getUnits(): int;
 
+	public function getDiscountPercent(): float;
+
+	/**
+	 * Returns the discount value for all units.
+	 */
+	public function countDiscountValue(): Money;
+
 	/**
 	 * Returns the value of taxes for all units.
 	 */
 	public function countTaxValue(): Money;
 
 	/**
-	 * Returns the value of unit without tax.
+	 * Returns the value of unit without tax, optionally with discount applied.
 	 */
-	public function countUntaxedUnitValue(): Money;
+	public function countUntaxedUnitValue(bool $applyDiscount = false): Money;
 
 	/**
 	 * Returns the final value of all taxed units.

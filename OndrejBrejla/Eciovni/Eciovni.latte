@@ -53,6 +53,7 @@
  *
  * @param    string                $currency
  * @param    string                $paymentType
+ * @param    bool	               $discountUsed true if any item has discount applied
 *}
 <html>
 	<head>
@@ -241,9 +242,11 @@
 				<thead>
 					<tr>
 						<th style="text-align:left;">Položka</th>
-						<th style="text-align: right; width:140px;">MJ</th>
+						<th style="text-align: right;">MJ</th>
 						<th style="text-align: right;">Počet MJ</th>
-						<th style="text-align: right; width:110px;">Cena MJ</th>
+						<th style="text-align: right;">Cena MJ</th>
+						<th style="text-align: right;" n:if="$discountUsed">%Zľava</th>
+						<th style="text-align: right;" n:if="$discountUsed">Zľava</th>
 						<th style="text-align: right;" n:ifset="$supplierVatId">%DPH</th>
 						<th style="text-align: right;" n:ifset="$supplierVatId">DPH</th>
 						<th style="text-align: right;">Celkom ({$currency})</th>
@@ -255,6 +258,8 @@
 						<td style="text-align: right;">{$item->getUnitType()}</td>
 						<td style="text-align: right;">{$item->getUnits()|round}</td>
 						<td style="text-align: right;">{$item->countUntaxedUnitValue()|round}</td>
+						<td style="text-align: right;" n:if="$discountUsed">{$item->getDiscountPercent()|round}</td>
+						<td style="text-align: right;" n:if="$discountUsed">{$item->countDiscountValue()|round}</td>
 						<td style="text-align: right;" n:ifset="$supplierVatId">{$item->getTax()->inUpperDecimal() * 100 - 100|round}</td>
 						<td style="text-align: right;" n:ifset="$supplierVatId">{$item->countTaxValue()|round}</td>
 						<td style="text-align: right;">{$item->countFinalValue()|round}</td>
