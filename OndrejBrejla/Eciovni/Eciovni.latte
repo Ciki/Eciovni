@@ -54,7 +54,9 @@
  * @param    string                $currency
  * @param    string                $paymentType
  * @param    bool	               $discountUsed true if any item has discount applied
+ * @param    bool	               $generateQR
 *}
+{default $generateQR = true}
 <html>
 	<head>
 		<meta http-equiv="Content-Language" content="sk">
@@ -295,6 +297,13 @@
 				Vystavil:
 				<span n:if="$signatureText" style="font-style: italic;">{$signatureText}</span>
 			</div>
+
+			{if $generateQR}
+				{var $expirationDate4api = \DateTime::createFromFormat('d.m.Y', $expirationDate)->format('Y-m-d')}
+				{default $bic = 'TATRSKBX'} {*mandatory param*}
+				<img style="margin-top:20px;" class="qr" src="https://www.profit365.eu/services/API/QR/PayBySquare.png?IBAN={$supplierAccountNumber}&BIC={$bic}&Currency={$currency}&Amount={$finalValue|round}&DueDate={$expirationDate4api}&VS={$variableSymbol}&SS={$specificSymbol}&CS={$constantSymbol}&size=128" alt="QR">
+			{/if}
+
 		</div>
 	</body>
 </html>
