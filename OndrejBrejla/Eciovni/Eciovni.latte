@@ -70,9 +70,7 @@
 	<head>
 		<meta http-equiv="Content-Language" content="sk">
 		<title></title>
-	</head>
 
-	<body>
 		<style type="text/css">
 			body {
 				font-family: Arial;
@@ -101,6 +99,25 @@
 				font-size:11px;
 			}
 		</style>
+	</head>
+
+	<body>
+
+		{* set page footer if QR enabled https://mpdf.github.io/headers-footers/method-4.html *}
+		<htmlpagefooter name="footerQR" n:if="$generateQR">
+			{var $expirationDate4api = \DateTime::createFromFormat('d.m.Y', $expirationDate)->format('Y-m-d')}
+			{default $bic = 'TATRSKBX'} {*mandatory param*}
+			<img style="float:left;" class="qr" src="https://www.profit365.eu/services/API/QR/PayBySquare.png?IBAN={$supplierAccountNumber}&BIC={$bic}&Currency={$currency}&Amount={$finalValue|round}&DueDate={$expirationDate4api}&VS={$variableSymbol}&SS={$specificSymbol}&CS={$constantSymbol}&size=128" alt="QR">
+
+			<p class="notice" style="width: 700px;font-size: 11px;display: inline-block;margin: 85px 0 20px 20px;">
+				<b>Tip:</b>
+				Doklad pohodlne uhradíte prostredníctvom mobilnej aplikácie vašej banky, ktorá obsahuje čítačku QR kódov.
+				Priložením čítačky (ktorá používa fotoaparát Vášho smartphonu) na QR kód
+				sa vám automaticky predvyplnia skontrolované platobné údaje (IBAN, VS, KS, SS, SUMA),
+				ktorých potvrdením doklad uhradíte.
+			</p>
+		</htmlpagefooter>
+		<sethtmlpagefooter name="footerQR" value="on" />
 
 		<div>
 			<div style="text-align: right; padding-bottom:8px; margin-bottom:10px; border-bottom: 2px solid #000000; color: #1A5DAC; font-weight: bold; font-size: 20px;">
@@ -314,12 +331,6 @@
 				Vystavil:
 				<span n:if="$signatureText" style="font-style: italic;">{$signatureText}</span>
 			</div>
-
-			{if $generateQR}
-				{var $expirationDate4api = \DateTime::createFromFormat('d.m.Y', $expirationDate)->format('Y-m-d')}
-				{default $bic = 'TATRSKBX'} {*mandatory param*}
-				<img style="margin-top:20px;" class="qr" src="https://www.profit365.eu/services/API/QR/PayBySquare.png?IBAN={$supplierAccountNumber}&BIC={$bic}&Currency={$currency}&Amount={$finalValue|round}&DueDate={$expirationDate4api}&VS={$variableSymbol}&SS={$specificSymbol}&CS={$constantSymbol}&size=128" alt="QR">
-			{/if}
 
 		</div>
 	</body>

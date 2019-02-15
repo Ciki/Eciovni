@@ -58,6 +58,8 @@ class Eciovni
 		?string $dest = null): ?string
 	{
 		$this->generate($this->template);
+		// https://stackoverflow.com/questions/10931948/prevent-body-overlapping-footer-in-mpdf
+		$mpdf->setAutoBottomMargin = 'stretch';
 		$mpdf->WriteHTML((string) $this->template);
 
 		$result = null;
