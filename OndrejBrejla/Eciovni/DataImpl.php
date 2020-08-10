@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
 
-use DateTime;
+use DateTimeImmutable;
 
 /**
  * DataImpl - part of Eciovni plugin for Nette Framework.
@@ -50,16 +50,16 @@ class DataImpl implements Data
 	/** @var ?string */
 	private $specificSymbol;
 
-	/** @var DateTime */
+	/** @var DateTimeImmutable */
 	private $expirationDate;
 
-	/** @var DateTime */
+	/** @var DateTimeImmutable */
 	private $dateOfIssuance;
 
-	/** @var ?DateTime */
+	/** @var ?DateTimeImmutable */
 	private $dateOfDelivery;
 
-	/** @var ?DateTime */
+	/** @var ?DateTimeImmutable */
 	private $dateOfVatRevenueRecognition;
 
 	/** @var Item[] */

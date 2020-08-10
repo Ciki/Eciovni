@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
 
-use DateTime;
+use DateTimeImmutable;
 
 /**
  * DataBuilder - part of Eciovni plugin for Nette Framework.
@@ -50,16 +50,16 @@ class DataBuilder
 	/** @var ?string */
 	private $specificSymbol;
 
-	/** @var DateTime */
+	/** @var DateTimeImmutable */
 	private $expirationDate;
 
-	/** @var DateTime */
+	/** @var DateTimeImmutable */
 	private $dateOfIssuance;
 
-	/** @var ?DateTime */
+	/** @var ?DateTimeImmutable */
 	private $dateOfDelivery;
 
-	/** @var ?DateTime */
+	/** @var ?DateTimeImmutable */
 	private $dateOfVatRevenueRecognition;
 
 	/** @var Item[] */
@@ -67,7 +67,7 @@ class DataBuilder
 
 
 	public function __construct(string $id, string $title, Participant $supplier,
-		Participant $customer, DateTime $expirationDate, DateTime $dateOfIssuance,
+		Participant $customer, DateTimeImmutable $expirationDate, DateTimeImmutable $dateOfIssuance,
 		array $items, string $paymentType)
 	{
 		$this->id = $id;
@@ -156,25 +156,25 @@ class DataBuilder
 	}
 
 
-	public function getExpirationDate(): DateTime
+	public function getExpirationDate(): DateTimeImmutable
 	{
 		return $this->expirationDate;
 	}
 
 
-	public function getDateOfIssuance(): DateTime
+	public function getDateOfIssuance(): DateTimeImmutable
 	{
 		return $this->dateOfIssuance;
 	}
 
 
-	public function getDateOfDelivery(): ?DateTime
+	public function getDateOfDelivery(): ?DateTimeImmutable
 	{
 		return $this->dateOfDelivery;
 	}
 
 
-	public function getDateOfVatRevenueRecognition(): ?DateTime
+	public function getDateOfVatRevenueRecognition(): ?DateTimeImmutable
 	{
 		return $this->dateOfVatRevenueRecognition;
 	}
@@ -259,14 +259,14 @@ class DataBuilder
 	}
 
 
-	public function setDateOfDelivery(?DateTime $dateOfDelivery): self
+	public function setDateOfDelivery(?DateTimeImmutable $dateOfDelivery): self
 	{
 		$this->dateOfDelivery = $dateOfDelivery;
 		return $this;
 	}
 
 
-	public function setDateOfVatRevenueRecognition(?DateTime $dateOfTaxablePayment): self
+	public function setDateOfVatRevenueRecognition(?DateTimeImmutable $dateOfTaxablePayment): self
 	{
 		$this->dateOfVatRevenueRecognition = $dateOfTaxablePayment;
 		return $this;
