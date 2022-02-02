@@ -8,6 +8,7 @@ use Mpdf\Mpdf;
 use Nette\Application\LinkGenerator;
 use Nette\Application\UI\ITemplateFactory;
 use Nette\Bridges\ApplicationLatte\Template;
+use Nette\Localization\Translator;
 
 /**
  * Eciovni - plugin for Nette Framework for generating invoices using mPDF library.
@@ -29,7 +30,7 @@ class Eciovni
 
 
 	public function __construct(?Data $data, ITemplateFactory $templateFactory,
-		LinkGenerator $linkGenerator)
+		LinkGenerator $linkGenerator, ?Translator $translator = null)
 	{
 		if ($data !== null) {
 			$this->setData($data);
@@ -39,6 +40,7 @@ class Eciovni
 
 		/** @var Template $template */
 		$template = $templateFactory->createTemplate();
+		$template->setTranslator($translator);
 
 		$this->template = $template;
 		$this->template->getLatte()->addProvider('uiControl', $linkGenerator);
