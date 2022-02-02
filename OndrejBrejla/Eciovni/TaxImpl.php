@@ -62,6 +62,16 @@ class TaxImpl implements Tax
 
 
 	/**
+	 * Returns tax in a lower decimal format.
+	 * I.e. '0.22' for '22%'.
+	 */
+	public function inLowerDecimal(): float
+	{
+		return $this->percentage / 100;
+	}
+
+
+	/**
 	 * Returns tax in a upper decimal format.
 	 * I.e. '1.22' for '22%'.
 	 */

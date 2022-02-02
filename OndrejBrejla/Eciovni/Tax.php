@@ -25,5 +25,11 @@ interface Tax
 	 */
 	public function inUpperDecimal(): float;
 
+	/**
+	 * Returns tax in a lower decimal format.
+	 * I.e. '0.22' for '22%'.
+	 */
+	public function inLowerDecimal(): float;
+
 	public function asCoefficient(): float;
 }
