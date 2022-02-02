@@ -28,14 +28,14 @@ class ItemImpl implements Item
 	/** @var string */
 	private $unitType;
 
-	/** @var int */
+	/** @var float */
 	private $units;
 
 	/** @var boolean */
 	private $unitValueIsTaxed;
 
 
-	public function __construct(string $description, string $unitType, int $units,
+	public function __construct(string $description, string $unitType, float $units,
 		Money $unitValue, Tax $tax, float $discountPercent = 0.0,
 		bool $unitValueIsTaxed = true)
 	{
@@ -88,7 +88,7 @@ class ItemImpl implements Item
 	}
 
 
-	public function getUnits(): int
+	public function getUnits(): float
 	{
 		return $this->units;
 	}

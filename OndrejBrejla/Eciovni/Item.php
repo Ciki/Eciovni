@@ -22,7 +22,7 @@ interface Item
 
 	public function getUnitType(): string;
 
-	public function getUnits(): int;
+	public function getUnits(): float;
 
 	public function getDiscountPercent(): float;
 
