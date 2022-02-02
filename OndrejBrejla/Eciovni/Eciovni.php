@@ -268,7 +268,7 @@ class Eciovni
 		$sum = null;
 
 		foreach ($this->data->getItems() as $item) {
-			$itemTotalUntaxedValue = $item->countUntaxedUnitValue(true)->multiply($item->getUnits());
+			$itemTotalUntaxedValue = $item->countUntaxedFinalValue();
 			if ($sum === null) {
 				$sum = $itemTotalUntaxedValue;
 			} else {

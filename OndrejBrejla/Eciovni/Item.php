@@ -45,4 +45,9 @@ interface Item
 	 * Returns the final value of all taxed units.
 	 */
 	public function countFinalValue(): Money;
+
+	/**
+	 * Returns the final value of all untaxed units.
+	 */
+	public function countUntaxedFinalValue(): Money;
 }

@@ -95,44 +95,19 @@ class ItemImpl implements Item
 
 
 	/**
-	 * Returns the discount value for all units.
-	 */
-	public function countDiscountValue(): Money
-	{
-		return $this->countUntaxedUnitValue()->multiply($this->getUnits())->multiply($this->discountPercent / 100);
-	}
-
-
-	/**
-	 * Returns the value of taxes for all units.
-	 */
-	public function countTaxValue(): Money
-	{
-		return $this->countTaxedUnitValue()->subtract($this->countUntaxedUnitValue(true))->multiply($this->getUnits());
-	}
-
-
-	/**
-	 * Returns the taxed (& possibly discounted) value of one unit.
-	 */
-	private function countTaxedUnitValue(): Money
-	{
-		// need to use untaxedUnitValue even if isUnitValueTaxed=true as we need to apply discount first
-		return $this->countUntaxedUnitValue(true)->multiply($this->getTax()->inUpperDecimal());
-	}
-
-
-	/**
 	 * Returns the value of unit without tax, optionally with discount applied.
-	 * @param bool $applyDiscount
+	 * @param bool $applyDiscount true for information purposes only, it should NOT be used in calculations for total values
 	 */
 	public function countUntaxedUnitValue(bool $applyDiscount = false): Money
 	{
 		$ret = $unitValue = $this->getUnitValue();
 		if ($this->isUnitValueTaxed()) {
-			$ret = $unitValue->subtract($unitValue->multiply($this->getTax()->asCoefficient()));
+			$tax = $unitValue->multiply($this->getTax()->asCoefficient());
+			$ret = $unitValue->subtract($tax);
 		}
 		if ($applyDiscount) {
+//			$discount = $ret->multiply($this->discountPercent / 100);
+//			$ret = $ret->subtract($discount);
 			$ret = $ret->multiply((100 - $this->discountPercent) / 100);
 		}
 
@@ -141,11 +116,41 @@ class ItemImpl implements Item
 
 
 	/**
+	 * Returns the final value of all untaxed units.
+	 */
+	public function countUntaxedFinalValue(): Money
+	{
+		// we need to provide multiplier in one multiply() call as it rounds the output every time, we could lose some cents because of this
+		$discountCoef = (100 - $this->discountPercent) / 100;
+		return $this->countUntaxedUnitValue(false)->multiply($this->getUnits() * $discountCoef);
+	}
+
+
+	/**
+	 * Returns the discount value for all units.
+	 */
+	public function countDiscountValue(): Money
+	{
+		return $this->countUntaxedUnitValue(false)->multiply($this->getUnits())
+				->subtract($this->countUntaxedFinalValue());
+	}
+
+
+	/**
+	 * Returns the value of taxes for all units.
+	 */
+	public function countTaxValue(): Money
+	{
+		return $this->countUntaxedFinalValue()->multiply($this->getTax()->inLowerDecimal());
+	}
+
+
+	/**
 	 * Returns the final value of all taxed units.
 	 */
 	public function countFinalValue(): Money
 	{
-		return $this->countTaxedUnitValue()->multiply($this->getUnits());
+		return $this->countUntaxedFinalValue()->add($this->countTaxValue());
 	}
 
 
