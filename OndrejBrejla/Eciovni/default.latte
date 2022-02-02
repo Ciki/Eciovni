@@ -100,6 +100,48 @@
 			<td>
 				<table style="border: 2px solid #000000;">
 					<tr>
+						<td colspan="2">
+							<span style="color: #1A5DAC; font-weight: bold; font-size: 12px;">{_'Príjemca'}:</span>
+
+							<table style="font-weight: bold;">
+								<tr n:if="$recipientName">
+									<td>{$recipientName}</td>
+								</tr>
+								<tr n:if="$recipientStreet || $recipientHouseNumber">
+									<td>{$recipientStreet} {$recipientHouseNumber}</td>
+								</tr>
+								<tr n:if="$recipientCity || $recipientZip">
+									<td>{$recipientCity}, {$recipientZip}</td>
+								</tr>
+								<tr n:if="$recipientCountry">
+									<td>{$recipientCountry}</td>
+								</tr>
+							</table>
+
+							<table>
+								<tr n:if="$recipientIn">
+									<td>{_'IČO'}:</td>
+									<td>{empty($recipientIn) ? '' : $recipientIn}</td>
+								</tr>
+								<tr n:if="$recipientTin">
+									<td>{_'DIČ'}:</td>
+									<td>{$recipientTin}</td>
+								</tr>
+								<tr n:if="$recipientVatId">
+									<td>{_'IČ DPH'}:</td>
+									<td>{$recipientVatId}</td>
+								</tr>
+								{*<tr n:if="$recipientRegistryInfo">
+									<td colspan="2">{_'Spoločnosť je zapísaná v Obchodnom registri'} {$recipientRegistryInfo}</td>
+								</tr>
+								<tr n:if="$recipientAccountNumber">
+									<td>{_'Číslo účtu'}:</td>
+									<td>{$recipientAccountNumber}</td>
+								</tr>*}
+							</table>
+						</td>
+					</tr>
+					<tr>
 						<td width="100">{_'Forma úhrady'}:</td>
 						<td>{_$paymentType}</td>
 					</tr>

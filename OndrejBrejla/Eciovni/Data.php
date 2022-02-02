@@ -32,6 +32,8 @@ interface Data
 
 	public function getCustomer(): Participant;
 
+	public function getRecipient(): Participant;
+
 	public function getPaymentType(): ?string;
 
 	public function getVariableSymbol(): ?string;

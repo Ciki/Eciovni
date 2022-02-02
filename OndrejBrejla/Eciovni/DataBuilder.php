@@ -38,6 +38,9 @@ class DataBuilder
 	/** @var Participant */
 	private $customer;
 
+	/** @var Participant */
+	private $recipient;
+
 	/** @var ?string */
 	private $paymentType;
 
@@ -67,13 +70,14 @@ class DataBuilder
 
 
 	public function __construct(string $id, string $title, Participant $supplier,
-		Participant $customer, DateTimeImmutable $expirationDate, DateTimeImmutable $dateOfIssuance,
+		Participant $customer, Participant $recipient, DateTimeImmutable $expirationDate, DateTimeImmutable $dateOfIssuance,
 		array $items, string $paymentType)
 	{
 		$this->id = $id;
 		$this->title = $title;
 		$this->supplier = $supplier;
 		$this->customer = $customer;
+		$this->recipient = $recipient;
 		$this->paymentType = $paymentType;
 		$this->expirationDate = $expirationDate;
 		$this->dateOfIssuance = $dateOfIssuance;
@@ -129,6 +133,12 @@ class DataBuilder
 	public function getCustomer(): Participant
 	{
 		return $this->customer;
+	}
+
+
+	public function getRecipient(): Participant
+	{
+		return $this->recipient;
 	}
 
 

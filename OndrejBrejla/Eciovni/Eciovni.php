@@ -155,6 +155,7 @@ class Eciovni
 		$template->currency = $template->items[0]->getUnitValue()->getCurrency();
 		$this->generateSupplier($template);
 		$this->generateCustomer($template);
+		$this->generateRecipient($template);
 		$this->generateDates($template);
 		$this->generateSymbols($template);
 		$this->generateFinalValues($template);
@@ -200,6 +201,27 @@ class Eciovni
 		$template->customerVatPayer = $customer->isVatPayer();
 		$template->customerRegistryInfo = $customer->getRegistryInfo();
 		$template->customerAccountNumber = $customer->getAccountNumber();
+	}
+
+
+	/**
+	 * Generates recipient data into template.
+	 */
+	private function generateRecipient(Template $template): void
+	{
+		$recipient = $this->data->getRecipient();
+		$template->recipientName = $recipient->getName();
+		$template->recipientStreet = $recipient->getStreet();
+		$template->recipientHouseNumber = $recipient->getHouseNumber();
+		$template->recipientCity = $recipient->getCity();
+		$template->recipientZip = $recipient->getZip();
+		$template->recipientCountry = $recipient->getCountry();
+		$template->recipientIn = $recipient->getIn();
+		$template->recipientTin = $recipient->getTin();
+		$template->recipientVatId = $recipient->getVatId();
+		$template->recipientVatPayer = $recipient->isVatPayer();
+		$template->recipientRegistryInfo = $recipient->getRegistryInfo();
+		$template->recipientAccountNumber = $recipient->getAccountNumber();
 	}
 
 

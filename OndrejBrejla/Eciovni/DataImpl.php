@@ -38,6 +38,9 @@ class DataImpl implements Data
 	/** @var Participant */
 	private $customer;
 
+	/** @var Participant */
+	private $recipient;
+
 	/** @var ?string */
 	private $paymentType;
 
@@ -76,6 +79,7 @@ class DataImpl implements Data
 		$this->supplierLogoImgSrc = $dataBuilder->getSupplierLogoImgSrc();
 		$this->supplier = $dataBuilder->getSupplier();
 		$this->customer = $dataBuilder->getCustomer();
+		$this->recipient = $dataBuilder->getRecipient();
 		$this->paymentType = $dataBuilder->getPaymentType();
 		$this->variableSymbol = $dataBuilder->getVariableSymbol();
 		$this->constantSymbol = $dataBuilder->getConstantSymbol();
@@ -133,6 +137,12 @@ class DataImpl implements Data
 	public function getCustomer(): Participant
 	{
 		return $this->customer;
+	}
+
+
+	public function getRecipient(): Participant
+	{
+		return $this->recipient;
 	}
 
 
