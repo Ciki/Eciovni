@@ -9,7 +9,7 @@
 	<table style="margin-bottom:0;">
 		<tr>
 			<td width="54%" style="vertical-align:top;">
-				<span style="color: #1A5DAC; font-weight: bold; font-size: 12px;">Dodávateľ:</span>
+				<span style="color: #1A5DAC; font-weight: bold; font-size: 12px;">{_'Dodávateľ'}:</span>
 				<table style="font-weight: bold;">
 					<tr>
 						<td>{$supplierName}</td>
@@ -27,23 +27,23 @@
 
 				<table>
 					<tr n:if="$supplierIn">
-						<td width="{if $supplierVatId}50{else}40{/if}">IČO:</td>
+						<td width="{if $supplierVatId}50{else}40{/if}">{_'IČO'}:</td>
 						<td>{$supplierIn}</td>
 					</tr>
 					<tr n:if="$supplierTin">
-						<td>DIČ:</td>
+						<td>{_'DIČ'}:</td>
 						<td>{$supplierTin}</td>
 					</tr>
 					<tr>
 						{if $supplierVatId}
-							<td>IČ DPH:</td>
+							<td>{_'IČ DPH'}:</td>
 							<td>{$supplierVatId}</td>
 						{else}
-							<td colspan="2"><br>Nie sme platitelia DPH.</td>
+							<td colspan="2"><br>{_'Nie sme platitelia DPH'}.</td>
 							{/if}
 					</tr>
 					<tr n:if="$supplierRegistryInfo">
-						<td colspan="2">Spoločnosť je zapísaná v Obchodnom registri {$supplierRegistryInfo}</td>
+						<td colspan="2">{_'Spoločnosť je zapísaná v Obchodnom registri'} {$supplierRegistryInfo}</td>
 					</tr>
 				</table>
 			</td>
@@ -52,7 +52,7 @@
 				<table style="width: 100%;">
 					<tr>
 						<td colspan="2">
-							<span style="color: #1A5DAC; font-weight: bold; font-size: 12px;">Odberateľ:</span>
+							<span style="color: #1A5DAC; font-weight: bold; font-size: 12px;">{_'Odberateľ'}:</span>
 
 							<table style="font-weight: bold;">
 								<tr n:if="$customerName">
@@ -71,22 +71,22 @@
 
 							<table>
 								<tr n:if="$customerIn">
-									<td>IČO:</td>
+									<td>{_'IČO'}:</td>
 									<td>{empty($customerIn) ? '' : $customerIn}</td>
 								</tr>
 								<tr n:if="$customerTin">
-									<td>DIČ:</td>
+									<td>{_'DIČ'}:</td>
 									<td>{$customerTin}</td>
 								</tr>
 								<tr n:if="$customerVatId">
-									<td>IČ DPH:</td>
+									<td>{_'IČ DPH'}:</td>
 									<td>{$customerVatId}</td>
 								</tr>
 								{*<tr n:if="$customerRegistryInfo">
-									<td colspan="2">Spoločnosť je zapísaná v Obchodnom registri {$customerRegistryInfo}</td>
+									<td colspan="2">{_'Spoločnosť je zapísaná v Obchodnom registri'} {$customerRegistryInfo}</td>
 								</tr>
 								<tr n:if="$customerAccountNumber">
-									<td>Číslo účtu:</td>
+									<td>{_'Číslo účtu'}:</td>
 									<td>{$customerAccountNumber}</td>
 								</tr>*}
 							</table>
@@ -100,47 +100,47 @@
 			<td>
 				<table style="border: 2px solid #000000;">
 					<tr>
-						<td width="100">Forma úhrady:</td>
-						<td>{$paymentType}</td>
+						<td width="100">{_'Forma úhrady'}:</td>
+						<td>{_$paymentType}</td>
 					</tr>
 					<tr n:if="$supplierAccountNumber">
-						<td>Číslo účtu:</td>
+						<td>{_'Číslo účtu'}:</td>
 						<td style="font-weight: bold" width="220">{$supplierAccountNumber}</td>
 					</tr>
 					<tr n:if="$variableSymbol">
-						<td>Variabilný symbol:</td>
+						<td>{_'Variabilný symbol'}:</td>
 						<td>{$variableSymbol}</td>
 					</tr>
 					<tr n:if="$specificSymbol">
-						<td>Špecifický symbol:</td>
+						<td>{_'Špecifický symbol'}:</td>
 						<td>{$specificSymbol}</td>
 					</tr>
 					<tr n:if="$constantSymbol">
-						<td>Konštantný symbol:</td>
+						<td>{_'Konštantný symbol'}:</td>
 						<td>{$constantSymbol}</td>
 					</tr>
 					<tr n:if="$orderNumber">
-						<td>Objednávka:</td>
-						<td>{$orderNumber} <span n:if="$orderDate">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;zo dňa {$orderDate}</span></td>
+						<td>{_'Objednávka'}:</td>
+						<td>{$orderNumber} <span n:if="$orderDate">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{_'zo dňa'} {$orderDate}</span></td>
 					</tr>
 				</table>
 			</td><td>
 				<table>
 					<tr n:if="$dateOfIssuance">
-						<td>Dátum vyhotovenia:</td>
-						<td style="text-align: center;">{$dateOfIssuance}</td>
+						<td>{_'Dátum vyhotovenia'}:</td>
+						<td class="text-center">{$dateOfIssuance}</td>
 					</tr>
 					<tr n:if="$expirationDate">
-						<td>Dátum splatnosti:</td>
-						<td style="text-align: center;">{$expirationDate}</td>
+						<td>{_'Dátum splatnosti'}:</td>
+						<td class="text-center">{$expirationDate}</td>
 					</tr>
 					<tr n:if="$dateOfDelivery">
-						<td>Dátum dodania služby:</td>
+						<td>{_'Dátum dodania služby'}:</td>
 						<td>{$dateOfDelivery}</td>
 					</tr>
 					<tr n:if="$dateOfVatRevenueRecognition">
-						<td>Dátum uskutočnenia zdaniteľného plnenia:</td>
-						<td style="text-align: center;">{$dateOfVatRevenueRecognition}</td>
+						<td>{_'Dátum uskutočnenia zdaniteľného plnenia'}:</td>
+						<td class="text-center">{$dateOfVatRevenueRecognition}</td>
 					</tr>
 				</table>
 			</td>
@@ -148,69 +148,69 @@
 	</table>
 
 	<p n:if="$customText1" style="margin:0 0 5px 5px;">
-		{$customText1|breaklines}
+		{_$customText1|breaklines}
 	</p>
 
 	<table style="width: 100%; border: 1px solid #BEC8CE;" class="items-table">
 		<thead>
 			<tr>
-				<th style="text-align:left;">Položka</th>
-				<th style="text-align: right;">MJ</th>
-				<th style="text-align: right;">Počet MJ</th>
-				<th style="text-align: right;">Cena MJ</th>
-				<th style="text-align: right;" n:if="$discountUsed">%Zľava</th>
-				<th style="text-align: right;" n:if="$discountUsed">Zľava</th>
-				<th style="text-align: right;" n:if="$supplierVatId">%DPH</th>
-				<th style="text-align: right;" n:if="$supplierVatId">DPH</th>
-				<th style="text-align: right;">Celkom ({$currency})</th>
+				<th class="text-left">{_'Položka'}</th>
+				<th class="text-right">{_'MJ'}</th>
+				<th class="text-right">{_'Počet MJ'}</th>
+				<th class="text-right">{_'Cena MJ'}</th>
+				<th class="text-right" n:if="$discountUsed">%{_'Zľava'}</th>
+				<th class="text-right" n:if="$discountUsed">{_'Zľava'}</th>
+				<th class="text-right" n:if="$supplierVatId">%{_'DPH'}</th>
+				<th class="text-right" n:if="$supplierVatId">{_'DPH'}</th>
+				<th class="text-right">{_'Celkom'} ({$currency})</th>
 			</tr>
 		</thead>
 		<tbody n:foreach="$items as $item">
 			<tr>
 				<td>{$item->getDescription()}</td>
-				<td style="text-align: right;">{$item->getUnitType()}</td>
-				<td style="text-align: right;">{$item->getUnits()|round}</td>
-				<td style="text-align: right;">{$item->countUntaxedUnitValue()|round}</td>
-				<td style="text-align: right;" n:if="$discountUsed">{$item->getDiscountPercent()|round}</td>
-				<td style="text-align: right;" n:if="$discountUsed">{$item->countDiscountValue()|round}</td>
-				<td style="text-align: right;" n:if="$supplierVatId">{$item->getTax()->inUpperDecimal() * 100 - 100|round}</td>
-				<td style="text-align: right;" n:if="$supplierVatId">{$item->countTaxValue()|round}</td>
-				<td style="text-align: right;">{$item->countFinalValue()|round}</td>
+				<td class="text-right">{$item->getUnitType()}</td>
+				<td class="text-right">{$item->getUnits()|round}</td>
+				<td class="text-right">{$item->countUntaxedUnitValue()|round}</td>
+				<td class="text-right" n:if="$discountUsed">{$item->getDiscountPercent()|round}</td>
+				<td class="text-right" n:if="$discountUsed">{$item->countDiscountValue()|round}</td>
+				<td class="text-right" n:if="$supplierVatId">{$item->getTax()->inUpperDecimal() * 100 - 100|round}</td>
+				<td class="text-right" n:if="$supplierVatId">{$item->countTaxValue()|round}</td>
+				<td class="text-right">{$item->countFinalValue()|round}</td>
 			</tr>
 		</tbody>
 	</table>
 
-	<table style="width: 100%; border: 2px solid #000000;">
+	<table style="width: 100%; /*border: 2px solid #000000;*/">
 		{if $supplierVatId}
-			<tr>
-				<td>Celkom bez DPH ({$currency}):</td>
-				<td style="text-align: right;">{$finalUntaxedValue|round}</td>
-			</tr>
-			<tr>
-				<td>DPH ({$currency}):</td>
-				<td style="text-align: right;">{$finalTaxValue|round}</td>
-			</tr>
+				<tr>
+					<td>{_'Celkom bez DPH'} ({$currency}):</td>
+					<td class="text-right">{$finalUntaxedValue|round}</td>
+				</tr>
+				<tr>
+					<td>{_'DPH'} ({$currency}):</td>
+					<td class="text-right">{$finalTaxValue|round}</td>
+				</tr>
 			<tr style="font-size: 20px;">
-				<td><strong>Cena celkom s DPH ({$currency}):</strong></td>
-				<td style="text-align: right;"><strong>{$finalValue|round}</strong></td>
+				<td><strong>{_'Cena celkom s DPH'} ({$currency}):</strong></td>
+				<td class="text-right"><strong>{$finalValue|round}</strong></td>
 			</tr>
 		{else}
 			<tr style="font-size: 20px;">
-				<td><strong>Cena celkom ({$currency}):</strong></td>
-				<td style="text-align: right;"><strong>{$finalValue|round}</strong></td>
+				<td><strong>{_'Cena celkom'} ({$currency}):</strong></td>
+				<td class="text-right"><strong>{$finalValue|round}</strong></td>
 			</tr>
 		{/if}
 	</table>
 
 	<p n:if="$customText2">
-		{$customText2|breaklines}
+		{_$customText2|breaklines}
 	</p>
 
 	<div style="text-align: right; padding-right: 0px; margin-top:30px;" n:if="$signatureText || $signatureImgSrc">
 		<img n:if="$signatureImgSrc && file_exists($signatureImgSrc)" src="{file_get_contents($signatureImgSrc)|dataStream}" alt="Razítko s podpisom" />
 		{if $signatureText}
 			<br>
-			Vystavil:
+			{_'Vystavil'}:
 			<span style="font-style: italic;">{$signatureText}</span>
 		{/if}
 	</div>

@@ -36,7 +36,7 @@ class Eciovni
 			$this->setData($data);
 		}
 
-		$this->templatePath = __DIR__ . '/Eciovni.latte';
+		$this->setTemplatePath(__DIR__ . '/default.latte');
 
 		/** @var Template $template */
 		$template = $templateFactory->createTemplate();
