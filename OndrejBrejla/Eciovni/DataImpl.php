@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace OndrejBrejla\Eciovni;
 
 use DateTimeImmutable;
+use Money\Money;
 
 /**
  * DataImpl - part of Eciovni plugin for Nette Framework.
@@ -68,6 +69,9 @@ class DataImpl implements Data
 	/** @var Item[] */
 	private $items = [];
 
+	/** @var ?VatSummaryImpl */
+	private $vatSummary;
+
 
 	public function __construct(DataBuilder $dataBuilder)
 	{
@@ -89,6 +93,11 @@ class DataImpl implements Data
 		$this->dateOfDelivery = $dataBuilder->getDateOfDelivery();
 		$this->dateOfVatRevenueRecognition = $dataBuilder->getDateOfVatRevenueRecognition();
 		$this->items = $dataBuilder->getItems();
+
+		$vatRates = $dataBuilder->getVatRates();
+		if ($vatRates) {
+			$this->vatSummary = new VatSummaryImpl($vatRates, $this->items);
+		}
 	}
 
 
@@ -200,5 +209,10 @@ class DataImpl implements Data
 		return $this->items;
 	}
 
+
+	public function getVatSummary(): ?VatSummary
+	{
+		return $this->vatSummary;
+	}
 
 }

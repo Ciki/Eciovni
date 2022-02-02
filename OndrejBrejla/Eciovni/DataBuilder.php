@@ -68,6 +68,9 @@ class DataBuilder
 	/** @var Item[] */
 	private $items = [];
 
+	/** @var float[] */
+	private $vatRates = [];
+
 
 	public function __construct(string $id, string $title, Participant $supplier,
 		Participant $customer, Participant $recipient, DateTimeImmutable $expirationDate, DateTimeImmutable $dateOfIssuance,
@@ -197,6 +200,13 @@ class DataBuilder
 	}
 
 
+	/** @return float[] */
+	public function getVatRates(): array
+	{
+		return $this->vatRates;
+	}
+
+
 	public function build(): Data
 	{
 		return new DataImpl($this);
@@ -279,6 +289,13 @@ class DataBuilder
 	public function setDateOfVatRevenueRecognition(?DateTimeImmutable $dateOfTaxablePayment): self
 	{
 		$this->dateOfVatRevenueRecognition = $dateOfTaxablePayment;
+		return $this;
+	}
+
+
+	public function setVatRates(/* float[] */ array $vatRates): self
+	{
+		$this->vatRates = $vatRates;
 		return $this;
 	}
 

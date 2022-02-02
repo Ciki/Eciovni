@@ -224,6 +224,28 @@
 
 	<table style="width: 100%; /*border: 2px solid #000000;*/">
 		{if $supplierVatId}
+			{if $vatSummaryItems}
+				<tr>
+					<td colspan="2">
+						<table class="vat-summary-table">
+							<tbody>
+								<tr>
+									<td>{_'Sadzba dane'}</td>
+									<td>{_'Základ'}</td>
+									<td>{_'DPH'}</td>
+									<td>{_'Celkom'}</td>
+								</tr>
+								<tr n:foreach="$vatSummaryItems as $vsi">
+									<td>{_$vsi->getDescription()}</td>
+									<td>{$vsi->getAmountWithoutVat()|round}</td>
+									<td>{$vsi->getAmountVat()|round}</td>
+									<td>{$vsi->getAmountWithVat()|round}</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			{else}
 				<tr>
 					<td>{_'Celkom bez DPH'} ({$currency}):</td>
 					<td class="text-right">{$finalUntaxedValue|round}</td>
@@ -232,6 +254,7 @@
 					<td>{_'DPH'} ({$currency}):</td>
 					<td class="text-right">{$finalTaxValue|round}</td>
 				</tr>
+			{/if}
 			<tr style="font-size: 20px;">
 				<td><strong>{_'Cena celkom s DPH'} ({$currency}):</strong></td>
 				<td class="text-right"><strong>{$finalValue|round}</strong></td>

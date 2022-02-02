@@ -58,6 +58,7 @@
  * @param    ?string               $recipientAccountNumber
  *
  * @param    Item[]                $items
+ * @param    VatSummaryItem[]      $vatSummaryItems
  *
  * @param    double                $finalUntaxedValue
  * @param    double                $finalTaxValue
@@ -110,6 +111,16 @@
 			.items-table th {
 				font-size:11px;
 			}
+
+			.vat-summary-table {
+				width:100%;
+			}
+
+			.vat-summary-table th,
+			.vat-summary-table td {
+				text-align: right;
+			}
+
 			.text-left {
 				text-align: left;
 			}

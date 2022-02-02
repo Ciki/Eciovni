@@ -159,6 +159,7 @@ class Eciovni
 		$this->generateDates($template);
 		$this->generateSymbols($template);
 		$this->generateFinalValues($template);
+		$this->generateVatSummary($template);
 	}
 
 
@@ -316,6 +317,17 @@ class Eciovni
 		}
 
 		return $sum;
+	}
+
+
+
+	/**
+	 * Generates VAT summary into template.
+	 */
+	private function generateVatSummary(Template $template): void
+	{
+		$vatSummary = $this->data->getVatSummary();
+		$template->vatSummaryItems = $vatSummary->getVatSummaryItems();
 	}
 
 
