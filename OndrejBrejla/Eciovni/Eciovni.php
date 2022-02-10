@@ -53,6 +53,12 @@ class Eciovni
 	}
 
 
+	public function getTemplate(): Template
+	{
+		return $this->template;
+	}
+
+
 	/**
 	 * Exports Invoice template via passed mPDF.
 	 */
