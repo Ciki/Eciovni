@@ -135,14 +135,15 @@ class Eciovni
 	private function generate(Template $template): void
 	{
 		$template->setFile($this->templatePath);
-		$template->getLatte()->addFilter('round',
-			function($value, $precision = 2) {
-			if ($value instanceof Money) {
-				$value = $value->getAmount() / 100;
-			}
-			return number_format(round($value, $precision), $precision, ',', '');
-		});
-
+		$latte = $template->getLatte();
+		if (!isset($latte->getFilters()['round'])) {
+			$latte->addFilter('round', function($value, $precision = 2) {
+				if ($value instanceof Money) {
+					$value = $value->getAmount() / 100;
+				}
+				return number_format(round($value, $precision), $precision, '.', '');
+			});
+		}
 		$template->title = $this->data->getTitle();
 		$template->caption = (string) $this->data->getCaption();
 		$template->id = $this->data->getId();
