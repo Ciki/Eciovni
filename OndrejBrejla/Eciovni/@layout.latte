@@ -135,30 +135,6 @@
 
 	<body>
 
-		{* set page footer https://mpdf.github.io/headers-footers/method-4.html *}
-		<htmlpagefooter name="footerGeneral">
-			{if $generateQR && $supplierAccountNumber}
-				{var $expirationDate4api = \DateTime::createFromFormat('d.m.Y', $expirationDate)->format('Y-m-d')}
-				{default $bic = 'TATRSKBX'} {*mandatory param*}
-				<img style="float:left;" class="qr"
-					 src="https://www.profit365.eu/services/API/QR/PayBySquare.png?IBAN={$supplierAccountNumber}&BIC={$bic}&Currency={$currency}&Amount={$finalValue|round}&DueDate={$expirationDate4api}&VS={$variableSymbol}&SS={$specificSymbol}&CS={$constantSymbol}&size=128"
-					 alt="QR" />
-
-				<p class="notice" style="width: 700px;font-size: 11px;display: inline-block;margin: 85px 0 20px 20px;">
-					<b>{_'Tip'}:</b>
-					{_}Doklad pohodlne uhradíte prostredníctvom mobilnej aplikácie vašej banky, ktorá obsahuje čítačku QR kódov.
-					Priložením čítačky (ktorá používa fotoaparát Vášho smartphonu) na QR kód
-					sa vám automaticky predvyplnia skontrolované platobné údaje (IBAN, VS, KS, SS, SUMA),
-					ktorých potvrdením doklad uhradíte.{/_}
-				</p>
-			{/if}
-
-			{*<p class="clearfix" style="margin-top:40px;padding-top:10px; font-size:11px; border-top:1px solid black; text-align:center; font-style: italic;">
-				{_'Vytvorené v aplikácii'} <a href="https://www.xyz.sk">www.xyz.sk</a>
-			</p>*}
-		</htmlpagefooter>
-		<sethtmlpagefooter name="footerGeneral" value="on" />
-
 		{include #content}
 
 	</body>
