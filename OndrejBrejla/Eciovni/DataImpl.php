@@ -55,7 +55,7 @@ class DataImpl implements Data
 	private $specificSymbol;
 
 	/** @var DateTimeImmutable */
-	private $expirationDate;
+	private $dueDate;
 
 	/** @var DateTimeImmutable */
 	private $dateOfIssuance;
@@ -88,7 +88,7 @@ class DataImpl implements Data
 		$this->variableSymbol = $dataBuilder->getVariableSymbol();
 		$this->constantSymbol = $dataBuilder->getConstantSymbol();
 		$this->specificSymbol = $dataBuilder->getSpecificSymbol();
-		$this->expirationDate = $dataBuilder->getExpirationDate();
+		$this->dueDate = $dataBuilder->getDueDate();
 		$this->dateOfIssuance = $dataBuilder->getDateOfIssuance();
 		$this->dateOfDelivery = $dataBuilder->getDateOfDelivery();
 		$this->dateOfVatRevenueRecognition = $dataBuilder->getDateOfVatRevenueRecognition();
@@ -179,9 +179,9 @@ class DataImpl implements Data
 	}
 
 
-	public function getExpirationDate(string $format = 'd.m.Y'): string
+	public function getDueDate(string $format = 'd.m.Y'): string
 	{
-		return $this->expirationDate->format($format);
+		return $this->dueDate->format($format);
 	}
 
 

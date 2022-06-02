@@ -240,7 +240,7 @@ class Eciovni
 	{
 		$template->dateOfIssuance = $this->data->getDateOfIssuance();
 		$template->dateOfDelivery = $this->data->getDateOfDelivery();
-		$template->expirationDate = $this->data->getExpirationDate();
+		$template->dueDate = $this->data->getDueDate();
 		$template->dateOfVatRevenueRecognition = $this->data->getDateOfVatRevenueRecognition();
 	}
 

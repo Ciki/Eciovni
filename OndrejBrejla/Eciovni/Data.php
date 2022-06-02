@@ -42,7 +42,7 @@ interface Data
 
 	public function getSpecificSymbol(): ?string;
 
-	public function getExpirationDate(string $format = 'd.m.Y'): string;
+	public function getDueDate(string $format = 'd.m.Y'): string;
 
 	public function getDateOfIssuance(string $format = 'd.m.Y'): string;
 

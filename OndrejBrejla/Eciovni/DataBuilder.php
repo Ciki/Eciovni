@@ -54,7 +54,7 @@ class DataBuilder
 	private $specificSymbol;
 
 	/** @var DateTimeImmutable */
-	private $expirationDate;
+	private $dueDate;
 
 	/** @var DateTimeImmutable */
 	private $dateOfIssuance;
@@ -73,7 +73,7 @@ class DataBuilder
 
 
 	public function __construct(string $id, string $title, Participant $supplier,
-		Participant $customer, Participant $recipient, DateTimeImmutable $expirationDate, DateTimeImmutable $dateOfIssuance,
+		Participant $customer, Participant $recipient, DateTimeImmutable $dueDate, DateTimeImmutable $dateOfIssuance,
 		array $items, ?string $paymentType)
 	{
 		$this->id = $id;
@@ -82,7 +82,7 @@ class DataBuilder
 		$this->customer = $customer;
 		$this->recipient = $recipient;
 		$this->paymentType = $paymentType;
-		$this->expirationDate = $expirationDate;
+		$this->dueDate = $dueDate;
 		$this->dateOfIssuance = $dateOfIssuance;
 		$this->addItems($items);
 	}
@@ -169,9 +169,9 @@ class DataBuilder
 	}
 
 
-	public function getExpirationDate(): DateTimeImmutable
+	public function getDueDate(): DateTimeImmutable
 	{
-		return $this->expirationDate;
+		return $this->dueDate;
 	}
 
 
