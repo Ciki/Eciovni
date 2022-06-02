@@ -74,7 +74,7 @@ class DataBuilder
 
 	public function __construct(string $id, string $title, Participant $supplier,
 		Participant $customer, Participant $recipient, DateTimeImmutable $expirationDate, DateTimeImmutable $dateOfIssuance,
-		array $items, string $paymentType)
+		array $items, ?string $paymentType)
 	{
 		$this->id = $id;
 		$this->title = $title;
