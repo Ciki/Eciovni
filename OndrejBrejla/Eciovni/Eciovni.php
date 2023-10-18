@@ -9,6 +9,7 @@ use Mpdf\Mpdf;
 use Nette\Application\LinkGenerator;
 use Nette\Application\UI\TemplateFactory;
 use Nette\Bridges\ApplicationLatte\Template;
+use Nette\InvalidStateException;
 use Nette\Localization\Translator;
 
 /**
@@ -20,21 +21,17 @@ use Nette\Localization\Translator;
  */
 final class Eciovni
 {
-	private ?Data $data = null;
-
 	private readonly Template $template;
 
 	private string $templatePath;
 
 
 	public function __construct(
-		?Data $data,
+		private	?Data $data,
 		TemplateFactory $templateFactory,
 		LinkGenerator $linkGenerator,
 		?Translator $translator = null
 	) {
-		$this->setData($data);
-
 		$this->setTemplatePath(__DIR__ . '/default.latte');
 
 		/** @var Template $template */
@@ -138,6 +135,13 @@ final class Eciovni
 	 */
 	private function generate(Template $template): void
 	{
+		if ($this->data === null) {
+			throw new InvalidStateException('Set $data to be generated please.');
+		}
+		if ($this->data->getItems() === []) {
+			throw new InvalidStateException('Set $data->items to be generated please.');
+		}
+
 		$template->setFile($this->templatePath);
 		$latte = $template->getLatte();
 		if (!isset($latte->getFilters()['round'])) {
