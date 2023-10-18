@@ -79,13 +79,13 @@ final class ItemImpl implements Item
 	{
 		$ret = $unitValue = $this->getUnitValue();
 		if ($this->isUnitValueTaxed()) {
-			$tax = $unitValue->multiply($this->getTax()->asCoefficient());
+			$tax = $unitValue->multiply((string) $this->getTax()->asCoefficient());
 			$ret = $unitValue->subtract($tax);
 		}
 		if ($applyDiscount) {
-			// $discount = $ret->multiply($this->discountPercent / 100);
+			// $discount = $ret->multiply((string) $this->discountPercent / 100);
 			// $ret = $ret->subtract($discount);
-			$ret = $ret->multiply((100 - $this->discountPercent) / 100);
+			$ret = $ret->multiply((string) ((100 - $this->discountPercent) / 100));
 		}
 
 		return $ret;
@@ -99,7 +99,7 @@ final class ItemImpl implements Item
 	{
 		// we need to provide multiplier in one multiply() call as it rounds the output every time, we could lose some cents because of this
 		$discountCoef = (100 - $this->discountPercent) / 100;
-		return $this->countUntaxedUnitValue(false)->multiply($this->getUnits() * $discountCoef);
+		return $this->countUntaxedUnitValue(false)->multiply((string) ($this->getUnits() * $discountCoef));
 	}
 
 
@@ -108,7 +108,7 @@ final class ItemImpl implements Item
 	 */
 	public function countDiscountValue(): Money
 	{
-		return $this->countUntaxedUnitValue(false)->multiply($this->getUnits())
+		return $this->countUntaxedUnitValue(false)->multiply((string) $this->getUnits())
 			->subtract($this->countUntaxedFinalValue());
 	}
 
@@ -118,7 +118,7 @@ final class ItemImpl implements Item
 	 */
 	public function countTaxValue(): Money
 	{
-		return $this->countUntaxedFinalValue()->multiply($this->getTax()->inLowerDecimal());
+		return $this->countUntaxedFinalValue()->multiply((string) $this->getTax()->inLowerDecimal());
 	}
 
 
