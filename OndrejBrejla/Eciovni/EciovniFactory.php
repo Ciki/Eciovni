@@ -8,9 +8,6 @@ use Nette\Application\LinkGenerator;
 use Nette\Application\UI\TemplateFactory;
 use Nette\Localization\Translator;
 
-/**
- * @author Pavel Jurásek
- */
 final class EciovniFactory
 {
 	public function __construct(

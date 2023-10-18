@@ -46,7 +46,7 @@ final class VatSummaryImpl implements VatSummary
 		foreach ($this->items as $item) {
 			$itemVatRate = $item->getTax()->inPercentage();
 			if (!in_array($itemVatRate, $this->vatRates, true)) {
-				throw new InvalidArgumentException("Item vat rate $itemVatRate is not defined within given '\$this->vatRates' parameters, given only: " . join(',', $this->vatRates));
+				throw new InvalidArgumentException("Item vat rate {$itemVatRate} is not defined within given '\$this->vatRates' parameters, given only: " . join(',', $this->vatRates));
 			}
 			$vatSummaryItems[$itemVatRate]->addAmounts($item->countUntaxedFinalValue(), $item->countTaxValue(), $item->countFinalValue());
 			$vatSummaryItems['totals']->addAmounts($item->countUntaxedFinalValue(), $item->countTaxValue(), $item->countFinalValue());

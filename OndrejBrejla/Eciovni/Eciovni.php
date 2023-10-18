@@ -125,7 +125,7 @@ final class Eciovni
 	public function setTemplateParams(array $params): void
 	{
 		foreach ($params as $k => $v) {
-			$this->template->$k = $v;
+			$this->template->{$k} = $v;
 		}
 	}
 

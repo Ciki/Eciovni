@@ -15,9 +15,9 @@ final class TaxImpl implements Tax
 {
 	private readonly float $coefficient;
 
-
-	private function __construct(private readonly float $percentage)
-	{
+	private function __construct(
+		private readonly float $percentage
+	) {
 		$this->coefficient = round($percentage / (100 + $percentage), 10);
 	}
 
