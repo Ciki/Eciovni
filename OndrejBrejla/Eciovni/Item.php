@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
@@ -13,7 +14,6 @@ use Money\Money;
  */
 interface Item
 {
-
 	public function getDescription(): string;
 
 	public function getTax(): Tax;

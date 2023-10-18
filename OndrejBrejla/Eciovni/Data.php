@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
@@ -12,7 +13,6 @@ namespace OndrejBrejla\Eciovni;
  */
 interface Data
 {
-
 	/**
 	 * Returns the invoice title.
 	 */
@@ -50,7 +50,9 @@ interface Data
 
 	public function getDateOfVatRevenueRecognition(string $format = 'd.m.Y'): string;
 
-	/** @return Item[] */
+	/**
+	 * @return list<Item>
+	 */
 	public function getItems(): array;
 
 	public function getVatSummary(): ?VatSummary;

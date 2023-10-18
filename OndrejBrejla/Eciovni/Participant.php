@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
@@ -12,7 +13,6 @@ namespace OndrejBrejla\Eciovni;
  */
 interface Participant
 {
-
 	public function getName(): string;
 
 	public function getStreet(): string;

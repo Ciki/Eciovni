@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
@@ -11,6 +12,8 @@ namespace OndrejBrejla\Eciovni;
  */
 interface VatSummary
 {
-
-	public function getVatSummaryItems(): /* VatSummaryItem[] */ array;
+	/**
+	 * @return array<float|string, VatSummaryItem>
+	 */
+	public function getVatSummaryItems(): array;
 }
