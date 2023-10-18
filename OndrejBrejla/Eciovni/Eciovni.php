@@ -122,6 +122,9 @@ final class Eciovni
 	}
 
 
+	/**
+	 * @param array<string, mixed> $params
+	 */
 	public function setTemplateParams(array $params): void
 	{
 		foreach ($params as $k => $v) {
@@ -138,7 +141,7 @@ final class Eciovni
 		$template->setFile($this->templatePath);
 		$latte = $template->getLatte();
 		if (!isset($latte->getFilters()['round'])) {
-			$latte->addFilter('round', function ($value, $precision = 2): string {
+			$latte->addFilter('round', function (Money|int|float $value, int $precision = 2): string {
 				if ($value instanceof Money) {
 					$value = $value->getAmount() / 100;
 				}

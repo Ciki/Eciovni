@@ -10,7 +10,7 @@ parameters:
 	paths:
 		- OndrejBrejla
 
-	level: 5
+	level: 7
 
 	# https://github.com/TomasVotruba/type-coverage
 	type_coverage:

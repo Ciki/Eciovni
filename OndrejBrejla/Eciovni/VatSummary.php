@@ -13,7 +13,7 @@ namespace OndrejBrejla\Eciovni;
 interface VatSummary
 {
 	/**
-	 * @return array<float|string, VatSummaryItem>
+	 * @return array<int|float|string, VatSummaryItem>
 	 */
 	public function getVatSummaryItems(): array;
 }

@@ -27,11 +27,11 @@ final class VatSummaryImpl implements VatSummary
 
 
 	/**
-	 * @return array<float|string, VatSummaryItem>
+	 * @return array<int|float|string, VatSummaryItemImpl>
 	 */
 	public function getVatSummaryItems(): array
 	{
-		if (empty($this->items)) {
+		if ($this->items === []) {
 			return [];
 		}
 
