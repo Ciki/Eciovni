@@ -200,6 +200,7 @@
 				<th class="text-right">{_'MJ'}</th>
 				<th class="text-right">{_'Počet MJ'}</th>
 				<th class="text-right">{_'Cena MJ'}</th>
+				<th class="text-right">{_'Cena bez DPH'}</th>
 				<th class="text-right" n:if="$discountUsed">%{_'Zľava'}</th>
 				<th class="text-right" n:if="$discountUsed">{_'Zľava'}</th>
 				<th class="text-right" n:if="$supplierVatId">%{_'DPH'}</th>
@@ -213,6 +214,7 @@
 				<td class="text-right">{$item->getUnitType()}</td>
 				<td class="text-right">{$item->getUnits()|round}</td>
 				<td class="text-right">{$item->countUntaxedUnitValue()|round}</td>
+				<td class="text-right">{$item->countUntaxedFinalValue()|round}</td>
 				<td class="text-right" n:if="$discountUsed">{$item->getDiscountPercent()|round}</td>
 				<td class="text-right" n:if="$discountUsed">{$item->countDiscountValue()|round}</td>
 				<td class="text-right" n:if="$supplierVatId">{$item->getTax()->inUpperDecimal() * 100 - 100|round}</td>
@@ -255,16 +257,15 @@
 					<td class="text-right">{$finalTaxValue|round}</td>
 				</tr>
 			{/if}
-			<tr style="font-size: 20px;">
-				<td><strong>{_'Cena celkom s DPH'} ({$currency}):</strong></td>
-				<td class="text-right"><strong>{$finalValue|round}</strong></td>
-			</tr>
 		{else}
-			<tr style="font-size: 20px;">
-				<td><strong>{_'Cena celkom'} ({$currency}):</strong></td>
-				<td class="text-right"><strong>{$finalValue|round}</strong></td>
-			</tr>
 		{/if}
+
+		{var $finalValueLabel = $supplierVatId ? 'Cena celkom s DPH' : 'Cena celkom'}
+		<tr style="font-size: 20px;">
+			<td><strong>{_$finalValueLabel} ({$currency}):</strong></td>
+			<td class="text-right"><strong>{$finalValue|round}</strong></td>
+		</tr>
+
 	</table>
 
 	<p n:if="$customText2">
