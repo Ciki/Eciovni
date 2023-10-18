@@ -79,8 +79,10 @@ final class ItemImpl implements Item
 	{
 		$ret = $unitValue = $this->getUnitValue();
 		if ($this->isUnitValueTaxed()) {
-			$tax = $unitValue->multiply((string) $this->getTax()->asCoefficient());
-			$ret = $unitValue->subtract($tax);
+			// we need to calculate untaxed unit value from finalValue, as Tax relates to final value only, not to Unit value
+			$finalValue = $unitValue->multiply((string) $this->getUnits());
+			$finalUntaxedValue = $finalValue->divide((string) $this->getTax()->inUpperDecimal());
+			$ret = $unitValue = $finalUntaxedValue->divide((string) $this->getUnits());
 		}
 		if ($applyDiscount) {
 			// $discount = $ret->multiply((string) $this->discountPercent / 100);
@@ -93,7 +95,7 @@ final class ItemImpl implements Item
 
 
 	/**
-	 * Returns the final value of all untaxed units.
+	 * Returns the final value of all untaxed units, after discount.
 	 */
 	public function countUntaxedFinalValue(): Money
 	{
