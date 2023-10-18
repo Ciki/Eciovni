@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Tests\Eciovni;
 
@@ -18,4 +20,4 @@ Assert::same($tax1->inUpperDecimal(), $tax3->inUpperDecimal());
 Assert::same($tax2->inUpperDecimal(), $tax3->inUpperDecimal());
 
 Assert::same(21., $tax1->inPercentage());
-Assert::same(0.1736 , $tax1->asCoefficient());
+Assert::same(0.1735537190, $tax1->asCoefficient());
