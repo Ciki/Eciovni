@@ -1,0 +1,37 @@
+Eciovni
+=======
+
+nad JC sa nikdy nic nerata (zlava, dph, ..)
+vsetko sa vzdy rata nad Celkovou cenou bez DPH; Celkova cena bez DPH = Money(Mnozstvo * Money(JC bez DPH))
+Celkova cena bez DPH po zlave = Money(Celkova cena bez DPH * (100-zlavaV%)/100)
+nasledne DPH sa rata z Celkovej ceny bez DPH po zlave, teda DPH = Money(Celkova cena bez DPH po zlave * TaxInLowerDecimal())
+
+Zlava sa uplatnuje vzdy na Celkovu cenu bez DPH (pre vsetky MJ), nikdy nie na JC
+DPH sa rata vzdy az na celu polozku (pre vsetky MJ a po zlave), teda `Celkovu cenu bez DPH po zlave`, nikdy nie na JC
+
+Priklad vypoctu pre polozku s JC=97,50 s DPH a 3 kusmi:
+------------------
+celkova cena s dph (ocakavana): 97,50 * 3 = 292,5
+celkova cena bez dph: 292,5 / 1,21 = 241,7355371900826 => 241,74
+JC bez DPH: 241,74 / 3 = 80,58
+dph: 241,74 * 0,21 = 50,7654 => 50,77
+skuska spravnosti
+    celkova cena s dph (skutocna): 241,74 + 50,77 = 292,51
+vyrovnanie: celkova cena s dph (ocakavana) - celkova cena s dph (skutocna) = 292,50 - 292,51 = -0,01
+    vyrovnanie ma zmysel pouzit len vtedy, ak mame na vstupe `jednotkovu cenu s DPH` - predstavuje maloobchodnu cenu, kt. zakaznik ocakava.
+    interne vsak kniznica pracuje s preratanou JC bez DPH, z nej vyrata celkovu cenu bez dph, uplatni zlavy, vyrata dph a vyjde celkova cena s dph.
+    Tato vzdy sedi na vypocet, ale moze sa lisit od ocakavanej. Vtedy tento rozdiel je vhodne uviest na fakture ako `vyrovnanie`
+
+kedze DPH ratam na `Celkovu cenu bez DPH po zlave` a nie na 1 MJ, tak potrebujem co najvacsiu presnost TaxImpl::$coefficient, nie len 4 desatinne miesta
+
+
+
+overenie vypoctu absolutnej zlavy
+---------------
+bez dph 978,34
+zlava 10% => 97,83
+bez dph po zlave => (978,34 * 0,9) = 880,506 => 880,51
+dph 880,51 * 0,21 = 184,9071 => 184,91
+cena s dph = cena bez dph po zlave + dph => 880,51 + 184,91 = 1065,42
+zlava absolutna = cena bez dph (bez uplatnenia zlavy) - cena bez dph (so zlavou) = 978,34 - 880,51 = 97,83
+zlava absolutna vyratana z percent = 978,34 * 0,1 = 97,83
