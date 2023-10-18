@@ -100,8 +100,13 @@ final class ItemImpl implements Item
 	public function countUntaxedFinalValue(): Money
 	{
 		// we need to provide multiplier in one multiply() call as it rounds the output every time, we could lose some cents because of this
-		$discountCoef = (100 - $this->discountPercent) / 100;
-		return $this->countUntaxedUnitValue(false)->multiply((string) ($this->getUnits() * $discountCoef));
+		return $this->countUntaxedUnitValue(false)->multiply((string) ($this->getUnits() * $this->getDiscountCoef()));
+	}
+
+
+	private function getDiscountCoef(): float
+	{
+		return (100 - $this->discountPercent) / 100;
 	}
 
 
