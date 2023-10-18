@@ -265,6 +265,7 @@ final class Eciovni
 		$template->finalUntaxedValue = $this->countFinalUntaxedValue();
 		$template->finalTaxValue = $this->countFinalTaxValue();
 		$template->finalValue = $this->countFinalValues();
+		$template->finalAdjustmentValue = $this->countFinalAdjustmentValues();
 	}
 
 
@@ -321,6 +322,26 @@ final class Eciovni
 				$sum = $itemFinalValue;
 			} else {
 				$sum = $sum->add($itemFinalValue);
+			}
+		}
+
+		return $sum;
+	}
+
+
+	/**
+	 * Counts final adjustment value of all items.
+	 */
+	private function countFinalAdjustmentValues(): Money
+	{
+		$sum = null;
+
+		foreach ($this->data->getItems() as $item) {
+			$itemFinalAdjustmentValue = $item->countFinalAdjustmentValue();
+			if ($sum === null) {
+				$sum = $itemFinalAdjustmentValue;
+			} else {
+				$sum = $sum->add($itemFinalAdjustmentValue);
 			}
 		}
 

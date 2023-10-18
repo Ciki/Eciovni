@@ -136,4 +136,18 @@ final class ItemImpl implements Item
 	{
 		return $this->countUntaxedFinalValue()->add($this->countTaxValue());
 	}
+
+
+	/**
+	 * Returns the adjustment against expected final value caused by rounding.
+	 */
+	public function countFinalAdjustmentValue(): Money
+	{
+		// only in this case it makes sense to calculate adjustment against expected final value, otherwise it's calculated and no expectation exists
+		if ($this->isUnitValueTaxed()) {
+			$expectedFinalValue = $this->unitValue->multiply((string) ($this->getUnits() * $this->getDiscountCoef()));
+			return $expectedFinalValue->subtract($this->countFinalValue());
+		}
+		return new Money(0, $this->unitValue->getCurrency());
+	}
 }

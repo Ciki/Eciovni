@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OndrejBrejla\Eciovni;
 
 use DateTimeImmutable;
-use Money\Money;
 
 /**
  * DataImpl - part of Eciovni plugin for Nette Framework.

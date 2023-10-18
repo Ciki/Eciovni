@@ -260,6 +260,11 @@
 		{else}
 		{/if}
 
+		<tr n:if="$finalAdjustmentValue->getAmount() !== '0'">
+			<td>{_'Vyrovnanie'} ({$currency}):<</td>
+			<td class="text-right"><strong>{$finalAdjustmentValue|round}</strong></td>
+		</tr>
+
 		{var $finalValueLabel = $supplierVatId ? 'Cena celkom s DPH' : 'Cena celkom'}
 		<tr style="font-size: 20px;">
 			<td><strong>{_$finalValueLabel} ({$currency}):</strong></td>

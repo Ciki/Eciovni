@@ -27,6 +27,16 @@ interface Item
 	public function getDiscountPercent(): float;
 
 	/**
+	 * Returns the value of unit without tax, optionally with discount applied.
+	 */
+	public function countUntaxedUnitValue(bool $applyDiscount = false): Money;
+
+	/**
+	 * Returns the final value of all untaxed units.
+	 */
+	public function countUntaxedFinalValue(): Money;
+
+	/**
 	 * Returns the discount value for all units.
 	 */
 	public function countDiscountValue(): Money;
@@ -37,17 +47,12 @@ interface Item
 	public function countTaxValue(): Money;
 
 	/**
-	 * Returns the value of unit without tax, optionally with discount applied.
-	 */
-	public function countUntaxedUnitValue(bool $applyDiscount = false): Money;
-
-	/**
 	 * Returns the final value of all taxed units.
 	 */
 	public function countFinalValue(): Money;
 
 	/**
-	 * Returns the final value of all untaxed units.
+	 * Returns the adjustment against expected final value caused by rounding.
 	 */
-	public function countUntaxedFinalValue(): Money;
+	public function countFinalAdjustmentValue(): Money;
 }
