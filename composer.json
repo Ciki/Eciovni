@@ -11,16 +11,19 @@
         }
     ],
     "require": {
-        "php": ">=7.1 <8.2",
-        "nette/application": "^3.0",
-        "mpdf/mpdf": "^7.1|^8.0",
-        "moneyphp/money": "^3.1"
+        "php": ">=8.0 <8.3",
+        "nette/application": "^3.1",
+        "mpdf/mpdf": "^8.0",
+        "moneyphp/money": "^4.2"
     },
     "require-dev": {
         "roave/security-advisories": "dev-master",
-        "phpstan/phpstan-nette": "^0.10.1",
-        "latte/latte": "^2.4",
-        "nette/tester": "^2.1"
+        "phpstan/phpstan-nette": "^1.2",
+        "latte/latte": "^3.0",
+        "nette/tester": "^2.5",
+        "symplify/easy-coding-standard": "^12.0",
+		"tomasvotruba/type-coverage": "dev-main",
+        "rector/rector": "^0.18"
     },
     "autoload": {
         "psr-0": {
@@ -28,7 +31,11 @@
         }
     },
     "scripts": {
-        "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon -l5 OndrejBrejla/ --ansi",
+        "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon --ansi",
+        "ecs": "vendor/bin/ecs check --ansi",
+        "ecs-fix": "vendor/bin/ecs check --fix --ansi",
+        "rector": "vendor/bin/rector process --dry-run --ansi",
+        "rector-fix": "vendor/bin/rector process --ansi",
         "tester": [
             "vendor/bin/tester tests/"
         ],

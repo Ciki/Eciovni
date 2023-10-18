@@ -1,9 +1,23 @@
-parameters:
-	excludes_analyse:
-	    - %rootDir%/../../../mpdf/*
-
-#	ignoreErrors:
-
 includes:
 	- vendor/phpstan/phpstan-nette/extension.neon
 	- vendor/phpstan/phpstan-nette/rules.neon
+	- vendor/tomasvotruba/type-coverage/config/extension.neon
+
+parameters:
+	editorUrl: 'vscode://file/%%file%%:%%line%%'
+	editorUrlTitle: '%%file%%:%%line%%'
+
+	paths:
+		- OndrejBrejla
+
+	level: 5
+
+	# https://github.com/TomasVotruba/type-coverage
+	type_coverage:
+		return_type: 100
+		param_type: 100
+		property_type: 100
+		# print_suggestions: false
+		# print_suggestions: true
+
+
