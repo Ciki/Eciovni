@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
@@ -13,64 +14,46 @@ use Money\Money;
  * @license    New BSD License
  * @link       http://github.com/OndrejBrejla/Eciovni
  */
-class DataImpl implements Data
+final class DataImpl implements Data
 {
-	/** @var string */
-	private $title;
+	private readonly string $title;
 
-	/** @var ?string */
-	private $caption;
+	private ?string $caption = null;
 
-	/** @var string */
-	private $id;
+	private readonly string $id;
 
-	/** @var ?string */
-	private $signatureText;
+	private ?string $signatureText = null;
 
-	/** @var ?string */
-	private $signatureImgSrc;
+	private ?string $signatureImgSrc = null;
 
-	/** @var ?string */
-	private $supplierLogoImgSrc;
+	private ?string $supplierLogoImgSrc = null;
 
-	/** @var Participant */
-	private $supplier;
+	private readonly Participant $supplier;
 
-	/** @var Participant */
-	private $customer;
+	private readonly Participant $customer;
 
-	/** @var Participant */
-	private $recipient;
+	private readonly Participant $recipient;
 
-	/** @var ?string */
-	private $paymentType;
+	private ?string $paymentType = null;
 
-	/** @var ?string */
-	private $variableSymbol;
+	private ?string $variableSymbol = null;
 
-	/** @var ?string */
-	private $constantSymbol;
+	private ?string $constantSymbol = null;
 
-	/** @var ?string */
-	private $specificSymbol;
+	private ?string $specificSymbol = null;
 
-	/** @var DateTimeImmutable */
-	private $dueDate;
+	private readonly DateTimeImmutable $dueDate;
 
-	/** @var DateTimeImmutable */
-	private $dateOfIssuance;
+	private readonly DateTimeImmutable $dateOfIssuance;
 
-	/** @var ?DateTimeImmutable */
-	private $dateOfDelivery;
+	private ?DateTimeImmutable $dateOfDelivery = null;
 
-	/** @var ?DateTimeImmutable */
-	private $dateOfVatRevenueRecognition;
+	private ?DateTimeImmutable $dateOfVatRevenueRecognition = null;
 
-	/** @var Item[] */
-	private $items = [];
+	/** @var list<Item> */
+	private array $items = [];
 
-	/** @var ?VatSummaryImpl */
-	private $vatSummary;
+	private ?VatSummaryImpl $vatSummary = null;
 
 
 	public function __construct(DataBuilder $dataBuilder)
@@ -203,7 +186,9 @@ class DataImpl implements Data
 	}
 
 
-	/** @return Item[] */
+	/**
+	 * @return list<Item>
+	 */
 	public function getItems(): array
 	{
 		return $this->items;
@@ -214,5 +199,4 @@ class DataImpl implements Data
 	{
 		return $this->vatSummary;
 	}
-
 }

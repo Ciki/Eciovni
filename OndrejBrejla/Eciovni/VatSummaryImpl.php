@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
@@ -12,23 +13,23 @@ use Money\Money;
  * @license    New BSD License
  * @link       http://github.com/OndrejBrejla/Eciovni
  */
-class VatSummaryImpl implements VatSummary
+final class VatSummaryImpl implements VatSummary
 {
-	/** @var float[] */
-	private $vatRates = [];
-
-	/** @var Item[] */
-	private $items = [];
-
-
-	public function __construct(/* float[] */ array $vatRates, /* Item[] */ array $items)
-	{
-		$this->vatRates = $vatRates;
-		$this->items = $items;
+	/**
+	 * @param list<float> $vatRates
+	 * @param list<Item> $items
+	 */
+	public function __construct(
+		private readonly array $vatRates,
+		private array $items
+	) {
 	}
 
 
-	public function getVatSummaryItems(): /* VatSummaryItem[] */ array
+	/**
+	 * @return array<float|string, VatSummaryItem>
+	 */
+	public function getVatSummaryItems(): array
 	{
 		if (empty($this->items)) {
 			return [];
@@ -53,6 +54,4 @@ class VatSummaryImpl implements VatSummary
 
 		return $vatSummaryItems;
 	}
-
-
 }

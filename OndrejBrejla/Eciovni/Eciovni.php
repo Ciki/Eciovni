@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
@@ -6,7 +7,7 @@ namespace OndrejBrejla\Eciovni;
 use Money\Money;
 use Mpdf\Mpdf;
 use Nette\Application\LinkGenerator;
-use Nette\Application\UI\ITemplateFactory;
+use Nette\Application\UI\TemplateFactory;
 use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Localization\Translator;
 
@@ -17,24 +18,22 @@ use Nette\Localization\Translator;
  * @license    New BSD License
  * @link       http://github.com/OndrejBrejla/Eciovni
  */
-class Eciovni
+final class Eciovni
 {
-	/** @var Data|null */
-	private $data;
+	private ?Data $data = null;
 
-	/** @var Template */
-	private $template;
+	private readonly Template $template;
 
-	/** @var string */
-	private $templatePath;
+	private string $templatePath;
 
 
-	public function __construct(?Data $data, ITemplateFactory $templateFactory,
-		LinkGenerator $linkGenerator, ?Translator $translator = null)
-	{
-		if ($data !== null) {
-			$this->setData($data);
-		}
+	public function __construct(
+		?Data $data,
+		TemplateFactory $templateFactory,
+		LinkGenerator $linkGenerator,
+		?Translator $translator = null
+	) {
+		$this->setData($data);
 
 		$this->setTemplatePath(__DIR__ . '/default.latte');
 
@@ -62,9 +61,11 @@ class Eciovni
 	/**
 	 * Exports Invoice template via passed mPDF.
 	 */
-	public function exportToPdf(Mpdf $mpdf, ?string $name = null,
-		?string $dest = null): ?string
-	{
+	public function exportToPdf(
+		Mpdf $mpdf,
+		?string $name = null,
+		?string $dest = null
+	): ?string {
 		$this->generate($this->template);
 		// https://stackoverflow.com/questions/10931948/prevent-body-overlapping-footer-in-mpdf
 		$mpdf->setAutoBottomMargin = 'stretch';
@@ -137,7 +138,7 @@ class Eciovni
 		$template->setFile($this->templatePath);
 		$latte = $template->getLatte();
 		if (!isset($latte->getFilters()['round'])) {
-			$latte->addFilter('round', function($value, $precision = 2) {
+			$latte->addFilter('round', function ($value, $precision = 2): string {
 				if ($value instanceof Money) {
 					$value = $value->getAmount() / 100;
 				}
@@ -336,6 +337,4 @@ class Eciovni
 		$vatSummary = $this->data->getVatSummary();
 		$template->vatSummaryItems = $vatSummary->getVatSummaryItems();
 	}
-
-
 }

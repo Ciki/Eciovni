@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
@@ -9,54 +10,29 @@ namespace OndrejBrejla\Eciovni;
  * @license    New BSD License
  * @link       http://github.com/OndrejBrejla/Eciovni
  */
-class ParticipantBuilder
+final class ParticipantBuilder
 {
-	/** @var string */
-	private $name;
+	private ?string $in = null;
 
-	/** @var string */
-	private $street;
+	private ?string $tin = null;
 
-	/** @var string */
-	private $houseNumber;
+	private ?string $vatId = null;
 
-	/** @var string */
-	private $city;
+	private bool $vatPayer = false;
 
-	/** @var string */
-	private $zip;
+	private ?string $registryInfo = null;
 
-	/** @var string */
-	private $country;
-
-	/** @var ?string */
-	private $in;
-
-	/** @var ?string */
-	private $tin;
-
-	/** @var ?string */
-	private $vatId;
-
-	/** @var bool */
-	private $vatPayer = false;
-
-	/** @var ?string */
-	private $registryInfo;
-
-	/** @var ?string */
-	private $accountNumber;
+	private ?string $accountNumber = null;
 
 
-	public function __construct(string $name, string $street, string $houseNumber,
-		string $city, string $zip, string $country)
-	{
-		$this->name = $name;
-		$this->street = $street;
-		$this->houseNumber = $houseNumber;
-		$this->city = $city;
-		$this->zip = $zip;
-		$this->country = $country;
+	public function __construct(
+		private readonly string $name,
+		private readonly string $street,
+		private readonly string $houseNumber,
+		private readonly string $city,
+		private readonly string $zip,
+		private readonly string $country
+	) {
 	}
 
 
@@ -181,6 +157,4 @@ class ParticipantBuilder
 	{
 		return new ParticipantImpl($this);
 	}
-
-
 }

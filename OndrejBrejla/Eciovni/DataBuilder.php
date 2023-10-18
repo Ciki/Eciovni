@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
@@ -12,78 +13,47 @@ use DateTimeImmutable;
  * @license    New BSD License
  * @link       http://github.com/OndrejBrejla/Eciovni
  */
-class DataBuilder
+final class DataBuilder
 {
-	/** @var string */
-	private $title;
+	private ?string $caption = null;
 
-	/** @var ?string */
-	private $caption;
+	private ?string $signatureText = null;
 
-	/** @var string */
-	private $id;
+	private ?string $signatureImgSrc = null;
 
-	/** @var ?string */
-	private $signatureText;
+	private ?string $supplierLogoImgSrc = null;
 
-	/** @var ?string */
-	private $signatureImgSrc;
+	private ?string $variableSymbol = null;
 
-	/** @var ?string */
-	private $supplierLogoImgSrc;
+	private ?string $constantSymbol = null;
 
-	/** @var Participant */
-	private $supplier;
+	private ?string $specificSymbol = null;
 
-	/** @var Participant */
-	private $customer;
+	private ?DateTimeImmutable $dateOfDelivery = null;
 
-	/** @var Participant */
-	private $recipient;
+	private ?DateTimeImmutable $dateOfVatRevenueRecognition = null;
 
-	/** @var ?string */
-	private $paymentType;
+	/** @var list<Item> */
+	private array $items = [];
 
-	/** @var ?string */
-	private $variableSymbol;
-
-	/** @var ?string */
-	private $constantSymbol;
-
-	/** @var ?string */
-	private $specificSymbol;
-
-	/** @var DateTimeImmutable */
-	private $dueDate;
-
-	/** @var DateTimeImmutable */
-	private $dateOfIssuance;
-
-	/** @var ?DateTimeImmutable */
-	private $dateOfDelivery;
-
-	/** @var ?DateTimeImmutable */
-	private $dateOfVatRevenueRecognition;
-
-	/** @var Item[] */
-	private $items = [];
-
-	/** @var float[] */
-	private $vatRates = [];
+	/** @var list<float> */
+	private array $vatRates = [];
 
 
-	public function __construct(string $id, string $title, Participant $supplier,
-		Participant $customer, Participant $recipient, DateTimeImmutable $dueDate, DateTimeImmutable $dateOfIssuance,
-		array $items, ?string $paymentType)
-	{
-		$this->id = $id;
-		$this->title = $title;
-		$this->supplier = $supplier;
-		$this->customer = $customer;
-		$this->recipient = $recipient;
-		$this->paymentType = $paymentType;
-		$this->dueDate = $dueDate;
-		$this->dateOfIssuance = $dateOfIssuance;
+	/**
+	 * @param list<Item> $items
+	 */
+	public function __construct(
+		private readonly string $id,
+		private readonly string $title,
+		private readonly Participant $supplier,
+		private readonly Participant $customer,
+		private readonly Participant $recipient,
+		private readonly DateTimeImmutable $dueDate,
+		private readonly DateTimeImmutable $dateOfIssuance,
+		array $items,
+		private readonly ?string $paymentType
+	) {
 		$this->addItems($items);
 	}
 
@@ -91,6 +61,8 @@ class DataBuilder
 	/**
 	 * Same as DataImpl methods declarations below
 	 */
+
+
 	public function getTitle(): string
 	{
 		return $this->title;
@@ -193,14 +165,18 @@ class DataBuilder
 	}
 
 
-	/** @return Item[] */
+	/**
+	 * @return list<Item>
+	 */
 	public function getItems(): array
 	{
 		return $this->items;
 	}
 
 
-	/** @return float[] */
+	/**
+	 * @return list<float>
+	 */
 	public function getVatRates(): array
 	{
 		return $this->vatRates;
@@ -216,6 +192,7 @@ class DataBuilder
 	/**
 	 * Same as DataImpl methods declarations above END
 	 */
+
 	public function setCaption(?string $caption): void
 	{
 		$this->caption = $caption;
@@ -243,7 +220,9 @@ class DataBuilder
 	}
 
 
-	/** @param Item[] $items */
+	/**
+	 * @param list<Item> $items
+	 */
 	private function addItems(array $items): void
 	{
 		foreach ($items as $item) {
@@ -293,11 +272,12 @@ class DataBuilder
 	}
 
 
-	public function setVatRates(/* float[] */ array $vatRates): self
+	/**
+	 * @param list<float> $vatRates
+	 */
+	public function setVatRates(array $vatRates): self
 	{
 		$this->vatRates = $vatRates;
 		return $this;
 	}
-
-
 }

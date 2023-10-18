@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
@@ -11,41 +12,17 @@ use Money\Money;
  * @license    New BSD License
  * @link       http://github.com/OndrejBrejla/Eciovni
  */
-class ItemImpl implements Item
+final class ItemImpl implements Item
 {
-	/** @var string */
-	private $description;
-
-	/** @var Tax */
-	private $tax;
-
-	/** @var float */
-	private $discountPercent;
-
-	/** @var Money */
-	private $unitValue;
-
-	/** @var string */
-	private $unitType;
-
-	/** @var float */
-	private $units;
-
-	/** @var boolean */
-	private $unitValueIsTaxed;
-
-
-	public function __construct(string $description, string $unitType, float $units,
-		Money $unitValue, Tax $tax, float $discountPercent = 0.0,
-		bool $unitValueIsTaxed = true)
-	{
-		$this->description = $description;
-		$this->unitType = $unitType;
-		$this->units = $units;
-		$this->unitValue = $unitValue;
-		$this->tax = $tax;
-		$this->discountPercent = $discountPercent;
-		$this->unitValueIsTaxed = $unitValueIsTaxed;
+	public function __construct(
+		private readonly string $description,
+		private readonly string $unitType,
+		private readonly float $units,
+		private readonly Money $unitValue,
+		private readonly Tax $tax,
+		private readonly float $discountPercent = 0.0,
+		private readonly bool $unitValueIsTaxed = true
+	) {
 	}
 
 
@@ -106,8 +83,8 @@ class ItemImpl implements Item
 			$ret = $unitValue->subtract($tax);
 		}
 		if ($applyDiscount) {
-//			$discount = $ret->multiply($this->discountPercent / 100);
-//			$ret = $ret->subtract($discount);
+			// $discount = $ret->multiply($this->discountPercent / 100);
+			// $ret = $ret->subtract($discount);
 			$ret = $ret->multiply((100 - $this->discountPercent) / 100);
 		}
 
@@ -132,7 +109,7 @@ class ItemImpl implements Item
 	public function countDiscountValue(): Money
 	{
 		return $this->countUntaxedUnitValue(false)->multiply($this->getUnits())
-				->subtract($this->countUntaxedFinalValue());
+			->subtract($this->countUntaxedFinalValue());
 	}
 
 
@@ -152,6 +129,4 @@ class ItemImpl implements Item
 	{
 		return $this->countUntaxedFinalValue()->add($this->countTaxValue());
 	}
-
-
 }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
@@ -12,25 +13,15 @@ use Money\Money;
  * @license    New BSD License
  * @link       http://github.com/OndrejBrejla/Eciovni
  */
-class VatSummaryItemImpl implements VatSummaryItem
+final class VatSummaryItemImpl implements VatSummaryItem
 {
-	/** @var string */
-	private $description;
-
-	/** @var Money */
-	private $amountWithoutVat;
-
-	/** @var Money */
-	private $amountVat;
-
-	/** @var Money */
-	private $amountWithVat;
-
-
-	public function __construct(string $description, Money $amountWithoutVat, Money $amountVat, Money $amountWithVat)
-	{
+	public function __construct(
+		private readonly string $description,
+		private Money $amountWithoutVat,
+		private Money $amountVat,
+		private Money $amountWithVat
+	) {
 		$this->checkAmounts($amountWithoutVat, $amountVat, $amountWithVat);
-		$this->description = $description;
 		$this->amountWithoutVat = $amountWithoutVat;
 		$this->amountWithVat = $amountWithVat;
 		$this->amountVat = $amountVat;
@@ -76,6 +67,4 @@ class VatSummaryItemImpl implements VatSummaryItem
 			throw new InvalidArgumentException('Amount without VAT + VAT !== Amount with VAT');
 		}
 	}
-
-
 }

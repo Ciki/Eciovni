@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
@@ -10,18 +11,13 @@ namespace OndrejBrejla\Eciovni;
  * @license    New BSD License
  * @link       http://github.com/OndrejBrejla/Eciovni
  */
-class TaxImpl implements Tax
+final class TaxImpl implements Tax
 {
-	/** @var float */
-	private $percentage;
-
-	/** @var float */
-	private $coefficient;
+	private readonly float $coefficient;
 
 
-	private function __construct(float $percentage)
+	private function __construct(private readonly float $percentage)
 	{
-		$this->percentage = $percentage;
 		$this->coefficient = round($percentage / (100 + $percentage), 4);
 	}
 
@@ -85,6 +81,4 @@ class TaxImpl implements Tax
 	{
 		return $this->coefficient;
 	}
-
-
 }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
@@ -10,43 +11,31 @@ namespace OndrejBrejla\Eciovni;
  * @license    New BSD License
  * @link       http://github.com/OndrejBrejla/Eciovni
  */
-class ParticipantImpl implements Participant
+final class ParticipantImpl implements Participant
 {
-	/** @var string */
-	private $name;
+	private readonly string $name;
 
-	/** @var string */
-	private $street;
+	private readonly string $street;
 
-	/** @var string */
-	private $houseNumber;
+	private readonly string $houseNumber;
 
-	/** @var string */
-	private $city;
+	private readonly string $city;
 
-	/** @var string */
-	private $zip;
+	private readonly string $zip;
 
-	/** @var string */
-	private $country;
+	private readonly string $country;
 
-	/** @var ?string */
-	private $in;
+	private ?string $in = null;
 
-	/** @var ?string */
-	private $tin;
+	private ?string $tin = null;
 
-	/** @var ?string */
-	private $vatId;
+	private ?string $vatId = null;
 
-	/** @var bool */
-	private $vatPayer;
+	private readonly bool $vatPayer;
 
-	/** @var ?string */
-	private $registryInfo;
+	private ?string $registryInfo = null;
 
-	/** @var ?string */
-	private $accountNumber;
+	private ?string $accountNumber = null;
 
 
 	public function __construct(ParticipantBuilder $participantBuilder)
@@ -145,6 +134,4 @@ class ParticipantImpl implements Participant
 	{
 		return $this->accountNumber;
 	}
-
-
 }

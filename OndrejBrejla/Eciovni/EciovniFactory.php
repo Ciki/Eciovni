@@ -1,33 +1,23 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OndrejBrejla\Eciovni;
 
 use Nette\Application\LinkGenerator;
-use Nette\Application\UI\ITemplateFactory;
+use Nette\Application\UI\TemplateFactory;
 use Nette\Localization\Translator;
 
 /**
  * @author Pavel Jurásek
  */
-class EciovniFactory
+final class EciovniFactory
 {
-	/** @var ITemplateFactory */
-	private $templateFactory;
-
-	/** @var LinkGenerator */
-	private $linkGenerator;
-
-	/** @var Translator */
-	private $translator;
-
-
-	public function __construct(ITemplateFactory $templateFactory,
-		LinkGenerator $linkGenerator, ?Translator $translator = null)
-	{
-		$this->templateFactory = $templateFactory;
-		$this->linkGenerator = $linkGenerator;
-		$this->setTranslator($translator);
+	public function __construct(
+		private readonly TemplateFactory $templateFactory,
+		private readonly LinkGenerator $linkGenerator,
+		private ?Translator $translator = null
+	) {
 	}
 
 
@@ -41,6 +31,4 @@ class EciovniFactory
 	{
 		return new Eciovni($data, $this->templateFactory, $this->linkGenerator, $this->translator);
 	}
-
-
 }
