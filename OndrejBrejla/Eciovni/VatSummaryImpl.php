@@ -27,7 +27,12 @@ final class VatSummaryImpl implements VatSummary
 
 
 	/**
-	 * @return array<int|float|string, VatSummaryItemImpl>
+	 * Buckets are keyed by the rate cast to string (whole-number rates coerce to int array keys,
+	 * fractional ones stay numeric strings) - a raw float key would be truncated to int by PHP,
+	 * silently merging distinct rates like 12.0 and 12.5 into one bucket (and deprecation-warning
+	 * since PHP 8.1). The 'totals' key holds the grand total across all rates.
+	 *
+	 * @return array<int|string, VatSummaryItemImpl>
 	 */
 	public function getVatSummaryItems(): array
 	{
@@ -39,7 +44,7 @@ final class VatSummaryImpl implements VatSummary
 		$zeroMoney = new Money(0, $currency);
 		$vatSummaryItems = [];
 		foreach ($this->vatRates as $rate) {
-			$vatSummaryItems[$rate] = new VatSummaryItemImpl($rate . '%', $zeroMoney, $zeroMoney, $zeroMoney);
+			$vatSummaryItems[(string) $rate] = new VatSummaryItemImpl($rate . '%', $zeroMoney, $zeroMoney, $zeroMoney);
 		}
 		$vatSummaryItems['totals'] = new VatSummaryItemImpl('Total', $zeroMoney, $zeroMoney, $zeroMoney);
 
@@ -48,7 +53,7 @@ final class VatSummaryImpl implements VatSummary
 			if (!in_array($itemVatRate, $this->vatRates, true)) {
 				throw new InvalidArgumentException("Item vat rate {$itemVatRate} is not defined within given '\$this->vatRates' parameters, given only: " . join(',', $this->vatRates));
 			}
-			$vatSummaryItems[$itemVatRate]->addAmounts($item->countUntaxedFinalValue(), $item->countTaxValue(), $item->countFinalValue());
+			$vatSummaryItems[(string) $itemVatRate]->addAmounts($item->countUntaxedFinalValue(), $item->countTaxValue(), $item->countFinalValue());
 			$vatSummaryItems['totals']->addAmounts($item->countUntaxedFinalValue(), $item->countTaxValue(), $item->countFinalValue());
 		}
 
